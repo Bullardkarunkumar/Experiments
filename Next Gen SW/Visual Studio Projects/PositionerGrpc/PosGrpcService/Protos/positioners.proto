@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option csharp_namespace = "PosGrpcService";
+
+package positioners;
+
+// The Positioner service definition.
+service Positioner {
+  // Gets the available positioner configurations
+  rpc GetConfiguration (PositionerName) returns (Configurations);
+	
+  // Gets the current position of the Positioner
+  rpc CP (PositionerName) returns (Position);
+
+  // Gets the status of the operation
+  rpc OPC (PositionerName) returns (Status);
+
+  // Seek to a given position
+  rpc SK (PositionRequest) returns (CommandResponse);
+
+  // Get data
+  rpc GetData(DataRequest) returns (DataResponse);
+
+  rpc GetDataStream(DataRequest) returns (stream DataResponse);
+}
+
+// The request message containing the configuration name.
+message PositionerName{
+  string positioner_name = 1;
+}
+// The response message containing all configurations
+message Configurations {
+  repeated Configuration configurations = 1;
+}
+// Positioner Configuration 
+message Configuration {
+  string positioner_name = 1;
+  string ip_address = 2;
+  string positioner_type = 3;
+  double upper_limit = 4;
+  double lower_limit = 5;
+}
+// Position message
+message Position {
+	double position = 1;
+}
+
+// Position request
+message PositionRequest {
+	string positioner_name = 1;
+	double position = 2;
+}
+// Status message
+message Status {
+	bool status = 1;
+}
+message CommandResponse {}
+
+message DataRequest {
+	int32 number_of_bytes = 1;
+}
+message DataResponse{
+	repeated double data = 1;
+}
