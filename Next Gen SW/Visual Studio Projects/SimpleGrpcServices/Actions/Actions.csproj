@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Protos\MeasureIteratorService.cs" />
+  </ItemGroup>
+
+   <ItemGroup>
+    <None Remove="Protos\DataStore.proto" />
+    <None Remove="Protos\Iterator.proto" />
+    <None Remove="Protos\NetworkAnalyzer.proto" />
+    <None Remove="Protos\PositionerIterator.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+	
+	<Protobuf Include="Protos\Iterator.proto" GrpcServices="Both" />
+	<Protobuf Include="Protos\DataStore.proto" GrpcServices="Both" />
+	<Protobuf Include="Protos\PositionerIterator.proto" GrpcServices="Both" />
+	<Protobuf Include="Protos\MeasureIterator.proto" GrpcServices="Both" />
+    <Protobuf Include="Protos\NetworkAnalyzer.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\Positioner.proto" GrpcServices="Client" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DataStore\DataStore.csproj" />
+  </ItemGroup>
+
+</Project>

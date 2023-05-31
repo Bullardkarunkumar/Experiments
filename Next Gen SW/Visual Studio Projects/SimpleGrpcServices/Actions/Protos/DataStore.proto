@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "Actions.DataStore";
+
+package datastore;
+
+
+// The DataStore service definition.
+service DataStore {
+   
+  rpc SaveTestResults(PairDataArray) returns (Reply);
+ 
+}
+message Pair {
+	string name = 1;
+	double value = 2;
+}
+
+message PairData {
+	repeated Pair pair = 1;
+}
+message PairDataArray {
+	repeated PairData pairData = 1;
+}
+
+// The response message
+message Reply {
+  string message = 1;
+}
+
+message Empty {}
+
+

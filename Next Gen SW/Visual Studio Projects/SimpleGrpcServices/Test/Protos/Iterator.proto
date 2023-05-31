@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "Actions.Iterator";
+
+package iterators;
+
+
+
+message IteratorPathInfo {
+	string name = 1;
+	double value = 2;
+}
+message IteratorLoopRequest {
+	string id = 1;
+	repeated IteratorPathInfo path = 2;
+}
+message Measurement {
+	repeated IteratorPathInfo path = 1;
+}
+message MeasurementArray {
+	repeated Measurement measurement = 1;
+}
+
+
+message Empty {}
+
+

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "Actions.MeasureIterator";
+
+package iterators;
+
+// The MeasureIterator service definition.
+service MeasureIterator {
+  
+  rpc Initialize (InitParams) returns (Reply);
+  rpc DoLoop(IteratorLoopRequest) returns (MeasurementArray);
+ 
+}
+
+// The request message 
+message InitParams {
+  string id = 1;
+  string name = 2;
+  string analyzer_id = 3;
+}
+
+// The response message
+message Reply {
+  string message = 1;
+}
+
+import "Protos/Iterator.proto";
+
+

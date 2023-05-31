@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosGrpcService", "PosGrpcSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Positioner", "Positioner\Positioner.csproj", "{0CDE74BA-E5B7-486D-BE21-3C5C08825BE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosGrpcClient", "PosGrpcClient\PosGrpcClient.csproj", "{3B9CE45E-913D-4647-A75E-AD3F436BA046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosGrpcClient", "PosGrpcClient\PosGrpcClient.csproj", "{3B9CE45E-913D-4647-A75E-AD3F436BA046}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{358A91F7-34D0-4959-BBBF-57256D8176A0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Actions.PositionerIterator";
+
+package iterators;
+
+// The PositionerIterator service definition.
+service PositionerIterator {
+  
+  rpc Initialize (InitParams) returns (Reply);
+  rpc DoLoop(IteratorLoopRequest) returns (MeasurementArray);
+  rpc GetCurrentPosition(Id) returns (PositionResponse);
+}
+
+// The request message 
+message InitParams {
+  string id = 1;
+  string name = 2;
+  double start = 3;
+  double stop = 4;
+  double step = 5;
+  string positioner_id = 6;
+  string chid = 7;
+}
+
+// The response message
+message Reply {
+  string message = 1;
+}
+
+message Id {
+	string id = 1;
+}
+message PositionResponse {
+	double position = 1;
+}
+
+import "Protos/Iterator.proto";
+

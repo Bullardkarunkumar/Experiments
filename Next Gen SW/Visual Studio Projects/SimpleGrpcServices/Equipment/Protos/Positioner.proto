@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Equipment.Positioner";
+
+package equipment;
+
+// The positioner service definition.
+service Positioner {
+  //
+  rpc Initialize (InitParams) returns (Reply);
+  rpc Seek (PositionRequest) returns (Reply);
+  rpc GetCurrentPosition (Id) returns (PositionResponse);
+}
+
+// The request message 
+message InitParams {
+  string id = 1;
+  double upperlimit = 2;
+  double lowerlimit = 3;
+}
+
+// The response message
+message Reply {
+  string message = 1;
+}
+
+message Id {
+	string id = 1;
+}
+message PositionRequest {
+	string id = 1;
+	double position = 2;
+}
+message PositionResponse {
+	double position = 1;
+}
+
+message Empty {}
+
