@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "Equipment Configuration",
+  "description": "JSON Schema for Equipment Configuration",
+  "type": "object",
+
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique equipment name"
+    },
+    "class": {
+      "enum": [ "Positioner", "Switch", "Network Analyzer" ],
+      "description": "ETS-Lindgren defined class of equipment"
+    },
+    "type": {
+      "enum": [ "ETS-EMControl", "ETS-2006", "RS-ZNB", "Agilent-PNA-X", "ETS-EMSwitch" ],
+      "description": "ETS-Lindgren defined type or sub-class of equipment"
+    },
+    "driver": {
+      "enum": [ "ETS-Lindgren EMControl", "ETS-Lindgren Positioner", "RS ZVA", "ZVB", "ZVT Series", "Agilent PNA Series", "ETS-Lindgren EMSwitch" ],
+        "description" : "Equipment driver from the available list"
+    },
+   
+    "workstation": {
+      "type": "string",
+      "description": "Workstation from which the connection to the equipment is to be made"
+    },
+    "connection": {
+      "type": "array",
+      "description": "An array of connection strings",
+      "minItems": 1,
+      "items": {
+        "properties": {
+          "protocol": {
+            "enum": [ "VISA" ],
+            "description": "Equipment communication protocol"
+          },
+          "address-string": {
+            "type": "string",
+            "description": "Connection string"
+          }
+        }
+      }
+    }
+  }
+}
