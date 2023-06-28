@@ -10,11 +10,11 @@
         static ObjectId testId;
         static string jobNumber;
 
-        //string atlasUri = "mongodb+srv://user:password@cluster0.qmhofyk.mongodb.net/?retryWrites=true&w=majority";
+        string atlasUri = "mongodb+srv://user:password@cluster0.qmhofyk.mongodb.net/?retryWrites=true&w=majority";
         public bool ConnectToDB()
         {
-            //client = new MongoClient(atlasUri);
-            //database = client.GetDatabase("ets_tests");
+            client = new MongoClient(atlasUri);
+            database = client.GetDatabase("ets_tests");
             return true;
         }
         public bool AddTest(string jobNum)

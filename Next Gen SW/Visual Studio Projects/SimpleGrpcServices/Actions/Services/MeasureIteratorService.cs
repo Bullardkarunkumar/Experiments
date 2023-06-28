@@ -65,7 +65,7 @@ namespace Actions.MeasureIterator.Services
             var naId = new Equipment.NetworkAnalyzer.Id { Id_ = measItdata.analyzer_id };
             ReadTraceResponse naresp = await _na_client.ReadTraceAsync(naId);
 
-            //PairDataArray pairDataArray = new PairDataArray();
+            PairDataArray pairDataArray = new PairDataArray();
                                   
             List<IteratorPathInfo> measurement = new List<IteratorPathInfo>();
             for (int i=0; i < naresp.Frequency.Count; i++)
@@ -75,14 +75,14 @@ namespace Actions.MeasureIterator.Services
                 measurement.Add(new IteratorPathInfo { Name = "Magnitude", Value = naresp.Magnitude[i] });
 
                 // for database storage
-                //PairData pairData = new PairData();
-                //foreach (IteratorPathInfo pathInfo in path)
-                //    pairData.Pair.Add(new Pair { Name = pathInfo.Name, Value = pathInfo.Value });
-                //pairData.Pair.Add(new Pair { Name = "Frequency", Value = naresp.Frequency[i] });
-                //pairData.Pair.Add(new Pair { Name = "Magnitude", Value = naresp.Magnitude[i] });
-                //pairDataArray.PairData.Add(pairData);
+                PairData pairData = new PairData();
+                foreach (IteratorPathInfo pathInfo in path)
+                    pairData.Pair.Add(new Pair { Name = pathInfo.Name, Value = pathInfo.Value });
+                pairData.Pair.Add(new Pair { Name = "Frequency", Value = naresp.Frequency[i] });
+                pairData.Pair.Add(new Pair { Name = "Magnitude", Value = naresp.Magnitude[i] });
+                pairDataArray.PairData.Add(pairData);
             }
-            //await _ds_client.SaveTestResultsAsync(pairDataArray);
+            await _ds_client.SaveTestResultsAsync(pairDataArray);
 
             Measurement measure = new Measurement();                    
             measure.Path.Add(measurement);                                        
