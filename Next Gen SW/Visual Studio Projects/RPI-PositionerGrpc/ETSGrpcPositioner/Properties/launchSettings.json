@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "PosGrpcService": {
+      "commandName": "Project",
+      "commandLineArgs": "--runtime win-x86",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5081;https://localhost:7081"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+option csharp_namespace = "PosGrpcService";
+
+package positioners;
+
+// The Positioner service definition.
+service Positioner 
+{
+  // Gets the available positioner configurations
+  rpc GetConfiguration (NullValue) returns (Configuration);
+  rpc SetConfiguration (Configuration) returns (BoolValue);
+
+  rpc SetRotationMode(IntValue) returns (NullValue);
+  rpc GetRotationMode(NullValue) returns (IntValue);
+
+  rpc SetTargetPosition(DoubleValue) returns (NullValue);
+  rpc GetTargetPosition(NullValue) returns (DoubleValue);
+	
+  // Gets the current position of the Positioner
+  rpc GetCP (NullValue) returns (DoubleValue);
+  rpc SetCP (DoubleValue) returns (NullValue);
+
+  // Gets the CW limit
+  rpc GetCWLimit (NullValue) returns (DoubleValue);
+  rpc SetCWLimit (DoubleValue) returns (NullValue);
+
+  // Gets the CCW limit
+  rpc GetCCWLimit (NullValue) returns (DoubleValue);
+  rpc SetCCWLimit (DoubleValue) returns (NullValue);
+
+  // Gets the Acceleration limit
+  rpc GetAccelerationInMS (NullValue) returns (DoubleValue);
+  rpc SetAccelerationInMS (DoubleValue) returns (NullValue);
+
+  // Gets the Scan Cycles limit
+  rpc GetScanCycles (NullValue) returns (DoubleValue);
+  rpc SetScanCycles (DoubleValue) returns (NullValue);
+
+    // Gets the Current Velocity
+  rpc GetCurrentVelocity (NullValue) returns (DoubleValue);
+  rpc SetCurrentVelocity (DoubleValue) returns (NullValue);
+
+  // Gets/sets the current speed
+  rpc SetCurrentSpeed(IntValue) returns (NullValue);
+  rpc GetCurrentSpeed(NullValue) returns (IntValue);
+
+  rpc SetSpeedSettingPercent(SpeedSettingValue) returns (NullValue);
+  rpc ClearDeviceError(NullValue) returns (NullValue);
+
+  // Get device error
+  rpc GetDeviceError(NullValue) returns (StringValue);
+
+  // Initializes the device
+  rpc InitDeviceSpecific(NullValue) returns (BoolValue);
+
+  // Is homed
+  rpc IsHomed(NullValue) returns (BoolValue);
+
+  // Gets the status of the operation
+  rpc OperationComplete (NullValue) returns (BoolValue);
+
+  // Gets the dir
+  rpc Direction (NullValue) returns (IntValue);
+
+  // Seek to a given position
+  rpc Seek (DoubleValue) returns (StringValue);
+
+  // Seek to a given positive position
+  rpc SeekPositive (DoubleValue) returns (StringValue);
+
+  // Seek to a given negative position
+  rpc SeekNegative (DoubleValue) returns (StringValue);
+
+  // Move Clockwise
+  rpc Clockwise (NullValue) returns (StringValue);
+
+  // Move Counter Clockwise
+  rpc CounterClockwise (NullValue) returns (StringValue);
+
+  // Continuous scan
+  rpc Scan (NullValue) returns (StringValue);
+
+  // stop
+  rpc Stop (NullValue) returns (StringValue);
+
+  // home
+  rpc Home (NullValue) returns (BoolValue);
+
+  // *IDN
+  rpc GetIDN (NullValue) returns (StringValue);
+
+}
+
+// Positioner Configuration 
+message Configuration 
+{
+  string VisaConnectString = 1;
+  string AxisSpecificProperties = 2;
+  double UpperLimit = 3;
+  double LowerLimit = 4;
+  double SpeedSetting1 = 5;
+  double SpeedSetting2 = 6;
+  double SpeedSetting3 = 7;
+  double SpeedSetting4 = 8;
+  double SpeedSetting5 = 9;
+  double SpeedSetting6 = 10;
+  double SpeedSetting7 = 11;
+  double SpeedSetting8 = 12;
+}
+
+message NullValue
+{}
+
+// Position message
+message DoubleValue 
+{
+	double value = 1;
+}
+
+// Status message
+message BoolValue 
+{
+	bool value = 1;
+}
+
+message IntValue
+{
+	int32 value = 1;
+}
+
+message StringValue
+{
+	string value = 1;
+}
+
+message SpeedSettingValue
+{
+	int32 setting = 1;
+	double value = 2;
+}
+

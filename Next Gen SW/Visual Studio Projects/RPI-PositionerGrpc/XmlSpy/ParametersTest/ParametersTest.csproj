@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{D8FEB53B-AEE9-164B-967E-48CCD10F5D0F}</ProjectGuid>
+		<OutputType>Exe</OutputType>
+		<TargetFramework Condition=" '$(TargetFramework)' == '' ">netcoreapp3.1</TargetFramework>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Version>1.0.0</Version>
+		<Authors>Altova</Authors>
+		<Product>Altova XMLSpy 2023r2 Enterprise Edition</Product>
+		<AssemblyName>ParametersTest</AssemblyName>
+		<RootNamespace>Parameters</RootNamespace>
+		<AssemblyCulture></AssemblyCulture>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Altova\Altova.csproj">
+			<Project>{D43E6C54-2DF5-454E-9566-DFFE2F3A6946}</Project>
+			<Name>Altova</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\AltovaXML\AltovaXML.csproj">
+			<Project>{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}</Project>
+			<Name>AltovaXML</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\Parameters\Parameters.csproj">
+			<Project>{FD8D4DC2-B957-504B-8BDB-C328E4A00A0C}</Project>
+			<Name>Parameters</Name>
+		</ProjectReference>
+	</ItemGroup>
+
+</Project>
