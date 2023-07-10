@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+option csharp_namespace = "VisaGrpcClient";
+
+package deviceConnections;
+
+// The VisaConnect service definition.
+service VisaConnect 
+{
+	// connect to device
+	// Address => Session Token
+	rpc Open(StringValue) returns (VisaResponse);	
+
+	// Close Connection to device
+	// Session Token => Status
+	rpc Close(StringValue) returns (VisaResponse);  
+
+	// Send Command 
+	rpc Write(WriteToSession) returns (VisaResponse);
+
+	// Read Command
+	rpc Read (ReadFromSession) returns (VisaResponse);
+
+	// Query Command
+	rpc Query (QuerySession) returns (VisaResponse);
+
+	// thread blocking Query
+	rpc QuerySessionWithLockout (QuerySession) returns (VisaResponse);
+
+  
+}
+
+message VisaResponse
+{
+	bool Succeded = 1;
+	string Message = 2;
+}
+
+
+//  Atribute enumeration goes here
+
+message WriteToSession
+{
+	string SessionToken = 1;
+	string Command = 2;
+}
+
+message ReadFromSession
+{
+	string SessionToken = 1;
+	VisaResponse Response = 2;
+}
+
+message QuerySession
+{
+	string SessionToken = 1;
+	string Command = 2;
+	VisaResponse Response = 3;
+}
+
+message NullValue
+{}
+
+// Position message
+message DoubleValue 
+{
+	double value = 1;
+}
+
+// Status message
+message BoolValue 
+{
+	bool value = 1;
+}
+
+message IntValue
+{
+	int32 value = 1;
+}
+
+message StringValue
+{
+	string value = 1;
+}

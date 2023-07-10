@@ -1,6 +1,7 @@
-﻿using System.Xml;
-using Parameters;
-using Parameters.ps;
+﻿using Parameters.ps;
+using System.Xml;
+using static Parameters.ps.Parameters2;
+using static Parameters.ps.ParameterType;
 
 namespace ETSGrpcPositioner.Positioner
 {
@@ -10,7 +11,7 @@ namespace ETSGrpcPositioner.Positioner
         {
         }
 
-        public Parameters2 Params { get; set; } 
+        public Parameters.ps.Parameters2 Params { get; set; } 
 
 
         public string ParamsString
@@ -29,6 +30,23 @@ namespace ETSGrpcPositioner.Positioner
 
         public string AxisNumber()
         {
+            if (Params != null)
+            {
+                foreach (ParametersType p in Params.Parameters3)
+                {
+                    foreach (ParameterType parameterType in p.Parameter)
+                    {
+                        var props = parameterType.Property;
+
+                        foreach (PropertyType prop in props)
+                        {
+                            string val = prop.Value2.First.StringValue.First.Value;
+                            return val;
+                        }
+                    }
+                }
+            }
+            
             return "1";
         }
 

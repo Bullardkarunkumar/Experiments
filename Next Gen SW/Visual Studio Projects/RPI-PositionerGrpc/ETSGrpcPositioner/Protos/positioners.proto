@@ -95,48 +95,56 @@ service Positioner
 // Positioner Configuration 
 message Configuration 
 {
-  string VisaConnectString = 1;
-  string AxisSpecificProperties = 2;
-  double UpperLimit = 3;
-  double LowerLimit = 4;
-  double SpeedSetting1 = 5;
-  double SpeedSetting2 = 6;
-  double SpeedSetting3 = 7;
-  double SpeedSetting4 = 8;
-  double SpeedSetting5 = 9;
-  double SpeedSetting6 = 10;
-  double SpeedSetting7 = 11;
-  double SpeedSetting8 = 12;
+  string SessionId = 1;
+  string VisaConnectString = 2;
+  string AxisSpecificProperties = 3;
+  double UpperLimit = 4;
+  double LowerLimit = 5;
+  double SpeedSetting1 = 6;
+  double SpeedSetting2 = 7;
+  double SpeedSetting3 = 8;
+  double SpeedSetting4 = 9;
+  double SpeedSetting5 = 10;
+  double SpeedSetting6 = 11;
+  double SpeedSetting7 = 12;
+  double SpeedSetting8 = 13;
 }
 
 message NullValue
-{}
+{
+	string sessionId = 1;
+}
 
 // Position message
 message DoubleValue 
 {
-	double value = 1;
+	string sessionId = 1;
+	double value = 2;
 }
 
 // Status message
 message BoolValue 
 {
-	bool value = 1;
+	string sessionId = 1;
+	bool value = 2;
 }
 
 message IntValue
 {
-	int32 value = 1;
+	string sessionId = 1;
+	int32 value = 2;
 }
 
 message StringValue
 {
-	string value = 1;
+	string sessionId = 1;
+	string value = 2;
 }
 
 message SpeedSettingValue
 {
-	int32 setting = 1;
-	double value = 2;
+	string sessionId = 1;
+	int32 setting = 2;
+	double value = 3;
 }
 

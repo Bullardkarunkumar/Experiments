@@ -1,47 +1,45 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="17.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>AltovaXML</AssemblyName>
+    <RootNamespace>AltovaXML</RootNamespace>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+	<PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net.Http" />
 
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProjectGuid>{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}</ProjectGuid>
-		<OutputType>Library</OutputType>
-		<TargetFramework Condition=" '$(TargetFramework)' == '' ">netcoreapp3.1</TargetFramework>
-		<!--<TargetFramework>netstandard2.0</TargetFramework>-->
-		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
-		<DefineConstants>DEBUG;TRACE</DefineConstants>
-		<PlatformTarget>AnyCPU</PlatformTarget>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>pdbonly</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release\</OutputPath>
-		<DefineConstants>TRACE</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<Version>1.0.0</Version>
-		<Authors>Altova</Authors>
-		<Product>Altova XMLSpy 2023r2 Enterprise Edition</Product>
-		<AssemblyName>AltovaXML</AssemblyName>
-		<RootNamespace>Altova</RootNamespace>
-		<AssemblyCulture></AssemblyCulture>
-	</PropertyGroup>
-
-	<!--
-	<ItemGroup>
-	</ItemGroup>
-	-->
-
-
-	<ItemGroup>
-		<ProjectReference Include="..\Altova\Altova.csproj" />
-	</ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+	<Compile Include="xmloperations.cs" />
+	<Compile Include="xstypes.cs" />
+	<Compile Include="typebase.cs"/>
+	<Compile Include="xmldocument.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Altova\Altova.csproj">
+      <Project>{D43E6C54-2DF5-454E-9566-DFFE2F3A6946}</Project>
+      <Name>Altova</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

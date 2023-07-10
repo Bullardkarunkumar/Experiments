@@ -1,274 +1,284 @@
 {
-	"$defs": {
-		".Parameters": {
-			"$ref": "#/$defs/ParametersType"
-		},
-		"EditorAttribute": {
-			"additionalProperties": false,
-			"properties": {
-				"@BaseType": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"@Type.AssemblyQualifiedName": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"@Type.AssemblyQualifiedName"
-			],
-			"type": "object"
-		},
-		"ParametersType": {
-			"additionalProperties": false,
-			"properties": {
-				"Name": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"UserRole": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"@xml:base": {
-					"$ref": "#/$defs/xs:anyURI"
-				},
-				"Children": {
-					"items": {
-						"$ref": "#/$defs/ParametersType"
-					},
-					"type": "array"
-				},
-				"Description": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"DisplayName": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"Properties": {
-					"items": {
-						"$ref": "#/$defs/PropertyType"
-					},
-					"type": "array"
-				}
-			},
-			"type": "object"
-		},
-		"PropertyType": {
-			"additionalProperties": false,
-			"properties": {
-				"Browsable": {
-					"$ref": "#/$defs/xs:boolean"
-				},
-				"ChoiceList": {
-					"$ref": "#/$defs/ValueType"
-				},
-				"CommandFormatString": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"CommandOrder": {
-					"$ref": "#/$defs/xs:unsignedLong"
-				},
-				"DefaultValue": {
-					"$ref": "#/$defs/ValueType"
-				},
-				"Description": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"DisplayName": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"DisplayOrder": {
-					"$ref": "#/$defs/xs:unsignedLong"
-				},
-				"DisplayUnits": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"Editor": {
-					"$ref": "#/$defs/EditorAttribute"
-				},
-				"Format": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"Name": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"Range": {
-					"$ref": "#/$defs/RangeAttribute"
-				},
-				"ReadOnly": {
-					"$ref": "#/$defs/xs:boolean"
-				},
-				"Tags": {
-					"items": {
-						"$ref": "#/$defs/TagValueType"
-					},
-					"type": "array"
-				},
-				"UnitsConverter": {
-					"$ref": "#/$defs/UnitsConverterAttribute"
-				},
-				"UserRole": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"ValidationRules": {
-					"items": {
-						"$ref": "#/$defs/ValidationRuleAttribute"
-					},
-					"type": "array"
-				},
-				"Value": {
-					"$ref": "#/$defs/ValueType"
-				}
-			},
-			"required": [
-				"Name",
-				"Value"
-			],
-			"type": "object"
-		},
-		"RangeAttribute": {
-			"additionalProperties": false,
-			"properties": {
-				"StartValue": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"StepValue": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"StopValue": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"StartValue",
-				"StepValue",
-				"StopValue"
-			],
-			"type": "object"
-		},
-		"RangeValueType": {
-			"additionalProperties": false,
-			"properties": {
-				"StartValue": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"StepValue": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"StopValue": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"StartValue",
-				"StepValue",
-				"StopValue"
-			],
-			"type": "object"
-		},
-		"TagValueType": {
-			"additionalProperties": false,
-			"properties": {
-				"Name": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"type": "object"
-		},
-		"TypeConverterAttribute": {
-			"additionalProperties": false,
-			"properties": {
-				"@Type.AssemblyQualifiedName": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"@Type.AssemblyQualifiedName"
-			],
-			"type": "object"
-		},
-		"UnitsConverterAttribute": {
-			"additionalProperties": false,
-			"properties": {
-				"@Type.AssemblyQualifiedName": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"@Type.AssemblyQualifiedName"
-			],
-			"type": "object"
-		},
-		"ValidationRuleAttribute": {
-			"additionalProperties": false,
-			"properties": {
-				"Name": {
-					"$ref": "#/$defs/xs:string"
-				},
-				"@Type.AssemblyQualifiedName": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"required": [
-				"Name"
-			],
-			"type": "object"
-		},
-		"ValueType": {
-			"additionalProperties": false,
-			"properties": {
-				"BooleanValue": {
-					"$ref": "#/$defs/xs:boolean"
-				},
-				"DoubleValue": {
-					"$ref": "#/$defs/xs:double"
-				},
-				"IntValue": {
-					"$ref": "#/$defs/xs:int"
-				},
-				"StringValue": {
-					"$ref": "#/$defs/xs:string"
-				}
-			},
-			"type": "object"
-		},
-		"xs:anyURI": {
-			"type": "string"
-		},
-		"xs:boolean": {
-			"type": "boolean"
-		},
-		"xs:double": {
-			"type": "number"
-		},
-		"xs:int": {
-			"maximum": 2147483647,
-			"minimum": -2147483648,
-			"type": "integer"
-		},
-		"xs:string": {
-			"type": "string"
-		},
-		"xs:unsignedLong": {
-			"maximum": 18446744073709551615,
-			"minimum": 0,
-			"type": "integer"
-		}
-	},
-	"$schema": "http://json-schema.org/schema#",
-	"additionalProperties": false,
-	"description": "JSON Schema generated by XMLSpy v2023 rel. 2 (x64) (http://www.altova.com)",
-	"properties": {
-		"@xmlns:ps": {
-			"default": "ETS.EMQuest.Parameters.xsd"
-		},
-		"@xmlns:xml": {
-			"default": "http://www.w3.org/XML/1998/namespace"
-		},
-		"@xmlns:xs": {
-			"default": "http://www.w3.org/2001/XMLSchema"
-		},
-		"Parameters": {
-			"$ref": "#/$defs/.Parameters"
-		}
-	},
-	"type": "object"
+  "$defs": {
+    ".Parameters": {
+      "$ref": "#/$defs/ParametersType"
+    },
+    "EditorAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "@BaseType": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "@Type.AssemblyQualifiedName": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "@Type.AssemblyQualifiedName"
+      ],
+      "type": "object"
+    },
+    "ParametersType": {
+      "additionalProperties": false,
+      "properties": {
+        "@Name": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "@UserRole": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "@xml:base": {
+          "$ref": "#/$defs/xs:anyURI"
+        },
+        "Children": {
+          "items": {
+            "$ref": "#/$defs/ParametersType"
+          },
+          "type": "array"
+        },
+        "Description": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "DisplayName": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "Properties": {
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PropertyType": {
+      "additionalProperties": false,
+      "properties": {
+        "Browsable": {
+          "$ref": "#/$defs/xs:boolean"
+        },
+        "ChoiceList": {
+          "items": {
+            "$ref": "#/$defs/ValueType"
+          },
+          "type": "array"
+        },
+        "CommandFormatString": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "CommandOrder": {
+          "$ref": "#/$defs/xs:unsignedLong"
+        },
+        "DefaultValue": {
+          "$ref": "#/$defs/ValueType"
+        },
+        "Description": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "DisplayName": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "DisplayOrder": {
+          "$ref": "#/$defs/xs:unsignedLong"
+        },
+        "DisplayUnits": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "Editor": {
+          "$ref": "#/$defs/EditorAttribute"
+        },
+        "Format": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "Name": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "Range": {
+          "$ref": "#/$defs/RangeAttribute"
+        },
+        "ReadOnly": {
+          "$ref": "#/$defs/xs:boolean"
+        },
+        "Tags": {
+          "items": {
+            "$ref": "#/$defs/TagValueType"
+          },
+          "type": "array"
+        },
+        "UnitsConverter": {
+          "$ref": "#/$defs/UnitsConverterAttribute"
+        },
+        "UserRole": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "ValidationRules": {
+          "items": {
+            "$ref": "#/$defs/ValidationRuleAttribute"
+          },
+          "type": "array"
+        },
+        "Value": {
+          "$ref": "#/$defs/ValueType"
+        }
+      },
+      "required": [
+        "Name",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "RangeAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "StartValue": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "StepValue": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "StopValue": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "StartValue",
+        "StepValue",
+        "StopValue"
+      ],
+      "type": "object"
+    },
+    "RangeValueType": {
+      "additionalProperties": false,
+      "properties": {
+        "StartValue": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "StepValue": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "StopValue": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "StartValue",
+        "StepValue",
+        "StopValue"
+      ],
+      "type": "object"
+    },
+    "TagValueType": {
+      "additionalProperties": false,
+      "properties": {
+        "@Name": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "@Value": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "@Name",
+        "@Value"
+      ],
+      "type": "object"
+    },
+    "TypeConverterAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "@Type.AssemblyQualifiedName": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "@Type.AssemblyQualifiedName"
+      ],
+      "type": "object"
+    },
+    "UnitsConverterAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "@Type.AssemblyQualifiedName": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "@Type.AssemblyQualifiedName"
+      ],
+      "type": "object"
+    },
+    "ValidationRuleAttribute": {
+      "additionalProperties": false,
+      "properties": {
+        "@Name": {
+          "$ref": "#/$defs/xs:string"
+        },
+        "@Type.AssemblyQualifiedName": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "required": [
+        "@Name"
+      ],
+      "type": "object"
+    },
+    "ValueType": {
+      "additionalProperties": false,
+      "properties": {
+        "BooleanValue": {
+          "$ref": "#/$defs/xs:boolean"
+        },
+        "DoubleValue": {
+          "$ref": "#/$defs/xs:double"
+        },
+        "IntValue": {
+          "$ref": "#/$defs/xs:int"
+        },
+        "StringValue": {
+          "$ref": "#/$defs/xs:string"
+        }
+      },
+      "type": "object"
+    },
+    "xs:anyURI": {
+      "type": "string"
+    },
+    "xs:boolean": {
+      "type": "boolean"
+    },
+    "xs:double": {
+      "type": "number"
+    },
+    "xs:int": {
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "type": "integer"
+    },
+    "xs:string": {
+      "type": "string"
+    },
+    "xs:unsignedLong": {
+      "maximum": 18446744073709551615,
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": false,
+  "description": "JSON Schema generated by XMLSpy v2023 rel. 2 (x64) (http://www.altova.com)",
+  "properties": {
+    "@xmlns:ps": {
+      "default": "ETS.EMQuest.Parameters.xsd"
+    },
+    "@xmlns:xml": {
+      "default": "http://www.w3.org/XML/1998/namespace"
+    },
+    "@xmlns:xs": {
+      "default": "http://www.w3.org/2001/XMLSchema"
+    },
+    "Parameters": {
+      "$ref": "#/$defs/.Parameters"
+    }
+  },
+  "type": "object"
 }

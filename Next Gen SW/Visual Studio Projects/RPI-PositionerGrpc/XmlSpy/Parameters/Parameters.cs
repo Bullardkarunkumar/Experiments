@@ -136,6 +136,57 @@ namespace ps
 		
 	} // class ChoiceListAttribute
 
+	public class CommandConverterAttribute : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_CommandConverterAttribute]); }}
+
+
+		public CommandConverterAttribute(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+			Type_AssemblyQualifiedName = new MemberAttribute_Type_AssemblyQualifiedName (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_CommandConverterAttribute_altova_Type_AssemblyQualifiedName]);
+
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new CommandConverterAttribute((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public MemberAttribute_Type_AssemblyQualifiedName Type_AssemblyQualifiedName;
+		public class MemberAttribute_Type_AssemblyQualifiedName
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_Type_AssemblyQualifiedName (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
+
+
+		// Elements
+	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("CommandConverterAttribute", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class CommandConverterAttribute
+
 	public class CommandFormatStringAttribute : xs.stringType
 	{
 		public static new Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_CommandFormatStringAttribute]); }}
@@ -284,6 +335,122 @@ namespace ps
 		}
 		
 	} // class DefaultValueAttribute
+
+	public class DefaultValueRestriction_Int : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_DefaultValueRestriction_Int]); }}
+
+
+		public DefaultValueRestriction_Int(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			IntValue = new MemberElement_IntValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DefaultValueRestriction_Int_altova_IntValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new DefaultValueRestriction_Int((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_IntValue IntValue;
+		public class MemberElement_IntValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_IntValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public xs.intType this [int i] { get { return At(i);} } 
+			public xs.intType At(int index) {return new xs.intType(owner.GetElementAt(info, index));}
+			public xs.intType First { get  {return new xs.intType(owner.GetElementFirst(info));} }
+			public xs.intType Last { get {return new xs.intType(owner.GetElementLast(info));} }
+			public xs.intType Append(){return new xs.intType(owner.CreateElement(info));}
+			public xs.intType AppendWithPrefix(string prefix) {return new xs.intType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new xs.intType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("DefaultValueRestriction.Int", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class DefaultValueRestriction_Int
+
+	public class DefaultValueRestriction_String : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_DefaultValueRestriction_String]); }}
+
+
+		public DefaultValueRestriction_String(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DefaultValueRestriction_String_altova_StringValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new DefaultValueRestriction_String((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_StringValue StringValue;
+		public class MemberElement_StringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_StringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public xs.stringType this [int i] { get { return At(i);} } 
+			public xs.stringType At(int index) {return new xs.stringType(owner.GetElementAt(info, index));}
+			public xs.stringType First { get  {return new xs.stringType(owner.GetElementFirst(info));} }
+			public xs.stringType Last { get {return new xs.stringType(owner.GetElementLast(info));} }
+			public xs.stringType Append(){return new xs.stringType(owner.CreateElement(info));}
+			public xs.stringType AppendWithPrefix(string prefix) {return new xs.stringType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new xs.stringType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("DefaultValueRestriction.String", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class DefaultValueRestriction_String
 
 	public class DescriptionAttribute : xs.stringType
 	{
@@ -540,6 +707,82 @@ namespace ps
 		
 	} // class NameType
 
+	public class Parameter_Boolean : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_Parameter_Boolean]); }}
+
+
+		public Parameter_Boolean(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+			DefaultValue = new MemberAttribute_DefaultValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_Parameter_Boolean_altova_DefaultValue]);
+
+			Property = new MemberElement_Property (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_Parameter_Boolean_altova_Property]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new Parameter_Boolean((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public MemberAttribute_DefaultValue DefaultValue;
+		public class MemberAttribute_DefaultValue
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_DefaultValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
+
+
+		// Elements
+	
+		public MemberElement_Property Property;
+		public class MemberElement_Property : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_Property (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.PropertyType2 this [int i] { get { return At(i);} } 
+			public ps.PropertyType2 At(int index) {return new ps.PropertyType2(owner.GetElementAt(info, index));}
+			public ps.PropertyType2 First { get  {return new ps.PropertyType2(owner.GetElementFirst(info));} }
+			public ps.PropertyType2 Last { get {return new ps.PropertyType2(owner.GetElementLast(info));} }
+			public ps.PropertyType2 Append(){return new ps.PropertyType2(owner.CreateElement(info));}
+			public ps.PropertyType2 AppendWithPrefix(string prefix) {return new ps.PropertyType2(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.PropertyType2.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("Parameter.Boolean", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class Parameter_Boolean
+
 	public class ParameterType : Altova.Xml.ElementType
 	{
 		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ParameterType]); }}
@@ -552,6 +795,7 @@ namespace ps
 		
 		private void instantiateMembers()
 		{
+			DefaultValue = new MemberAttribute_DefaultValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParameterType_altova_DefaultValue]);
 
 			Parameter = new MemberElement_Parameter (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParameterType_altova_Parameter]);
 			Property = new MemberElement_Property (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParameterType_altova_Property]);
@@ -563,6 +807,23 @@ namespace ps
 		}
 
 		// Attributes
+		public MemberAttribute_DefaultValue DefaultValue;
+		public class MemberAttribute_DefaultValue
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_DefaultValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
 
 
 		// Elements
@@ -637,6 +898,8 @@ namespace ps
 		{
 			base2 = new MemberAttribute_base2 (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_base2]);
 			Name = new MemberAttribute_Name (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_Name]);
+			ResourceName = new MemberAttribute_ResourceName (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_ResourceName]);
+			ResourceLocation = new MemberAttribute_ResourceLocation (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_ResourceLocation]);
 			UserRole = new MemberAttribute_UserRole (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_UserRole]);
 
 			Parameters3 = new MemberElement_Parameters3 (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ParametersType_altova_Parameters3]);
@@ -674,6 +937,40 @@ namespace ps
 			private Altova.Xml.TypeBase owner;
 			private Altova.TypeInfo.MemberInfo info; 
 			public MemberAttribute_Name (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
+		public MemberAttribute_ResourceName ResourceName;
+		public class MemberAttribute_ResourceName
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_ResourceName (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
+		public MemberAttribute_ResourceLocation ResourceLocation;
+		public class MemberAttribute_ResourceLocation
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_ResourceLocation (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
 			public string Value { get {
 				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
 			}
@@ -840,9 +1137,10 @@ namespace ps
 			ParenthesizePropertyName = new MemberElement_ParenthesizePropertyName (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_ParenthesizePropertyName]);
 			ReadOnly2 = new MemberElement_ReadOnly2 (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_ReadOnly2]);
 			TypeConverter = new MemberElement_TypeConverter (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_TypeConverter]);
+			TypeDescriptionProvider = new MemberElement_TypeDescriptionProvider (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_TypeDescriptionProvider]);
+			CommandConverter = new MemberElement_CommandConverter (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_CommandConverter]);
 			CommandFormatString = new MemberElement_CommandFormatString (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_CommandFormatString]);
 			CommandOrder = new MemberElement_CommandOrder (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_CommandOrder]);
-			UnitsConverter = new MemberElement_UnitsConverter (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_UnitsConverter]);
 			Tag = new MemberElement_Tag (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_Tag]);
 			ValidationRule = new MemberElement_ValidationRule (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType_altova_ValidationRule]);
 		}
@@ -1265,6 +1563,54 @@ namespace ps
 
 			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
 		}	
+		public MemberElement_TypeDescriptionProvider TypeDescriptionProvider;
+		public class MemberElement_TypeDescriptionProvider : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_TypeDescriptionProvider (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.TypeDescriptionProviderAttribute this [int i] { get { return At(i);} } 
+			public ps.TypeDescriptionProviderAttribute At(int index) {return new ps.TypeDescriptionProviderAttribute(owner.GetElementAt(info, index));}
+			public ps.TypeDescriptionProviderAttribute First { get  {return new ps.TypeDescriptionProviderAttribute(owner.GetElementFirst(info));} }
+			public ps.TypeDescriptionProviderAttribute Last { get {return new ps.TypeDescriptionProviderAttribute(owner.GetElementLast(info));} }
+			public ps.TypeDescriptionProviderAttribute Append(){return new ps.TypeDescriptionProviderAttribute(owner.CreateElement(info));}
+			public ps.TypeDescriptionProviderAttribute AppendWithPrefix(string prefix) {return new ps.TypeDescriptionProviderAttribute(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.TypeDescriptionProviderAttribute.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public MemberElement_CommandConverter CommandConverter;
+		public class MemberElement_CommandConverter : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_CommandConverter (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.CommandConverterAttribute this [int i] { get { return At(i);} } 
+			public ps.CommandConverterAttribute At(int index) {return new ps.CommandConverterAttribute(owner.GetElementAt(info, index));}
+			public ps.CommandConverterAttribute First { get  {return new ps.CommandConverterAttribute(owner.GetElementFirst(info));} }
+			public ps.CommandConverterAttribute Last { get {return new ps.CommandConverterAttribute(owner.GetElementLast(info));} }
+			public ps.CommandConverterAttribute Append(){return new ps.CommandConverterAttribute(owner.CreateElement(info));}
+			public ps.CommandConverterAttribute AppendWithPrefix(string prefix) {return new ps.CommandConverterAttribute(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.CommandConverterAttribute.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
 		public MemberElement_CommandFormatString CommandFormatString;
 		public class MemberElement_CommandFormatString : System.Collections.IEnumerable
 		{
@@ -1309,30 +1655,6 @@ namespace ps
 			public System.Collections.IEnumerator GetEnumerator()
 			{
 				return new xs.unsignedLongType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
-			}
-
-			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
-		}	
-		public MemberElement_UnitsConverter UnitsConverter;
-		public class MemberElement_UnitsConverter : System.Collections.IEnumerable
-		{
-			private Altova.Xml.TypeBase owner;
-			private Altova.TypeInfo.MemberInfo info;
-			public MemberElement_UnitsConverter (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
-			public ps.UnitsConverterAttribute this [int i] { get { return At(i);} } 
-			public ps.UnitsConverterAttribute At(int index) {return new ps.UnitsConverterAttribute(owner.GetElementAt(info, index));}
-			public ps.UnitsConverterAttribute First { get  {return new ps.UnitsConverterAttribute(owner.GetElementFirst(info));} }
-			public ps.UnitsConverterAttribute Last { get {return new ps.UnitsConverterAttribute(owner.GetElementLast(info));} }
-			public ps.UnitsConverterAttribute Append(){return new ps.UnitsConverterAttribute(owner.CreateElement(info));}
-			public ps.UnitsConverterAttribute AppendWithPrefix(string prefix) {return new ps.UnitsConverterAttribute(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
-			public bool Exists { get {return Count > 0;} }
-			public int Count { get {return owner.CountElement(info);} }
-			public void Remove() {owner.RemoveElement(info);}
-			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
-
-			public System.Collections.IEnumerator GetEnumerator()
-			{
-				return new ps.UnitsConverterAttribute.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
 			}
 
 			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
@@ -1652,6 +1974,7 @@ namespace ps
 			IntValue = new MemberElement_IntValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_IntValue]);
 			ObjectValue = new MemberElement_ObjectValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_ObjectValue]);
 			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_StringValue]);
+			LocalizedStringValue = new MemberElement_LocalizedStringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_LocalizedStringValue]);
 			RangeValue = new MemberElement_RangeValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_RangeValue]);
 			TypeValue = new MemberElement_TypeValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TagValueType_altova_TypeValue]);
 		}
@@ -1834,6 +2157,30 @@ namespace ps
 
 			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
 		}	
+		public MemberElement_LocalizedStringValue LocalizedStringValue;
+		public class MemberElement_LocalizedStringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_LocalizedStringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.LocalizedStringValueType this [int i] { get { return At(i);} } 
+			public ps.LocalizedStringValueType At(int index) {return new ps.LocalizedStringValueType(owner.GetElementAt(info, index));}
+			public ps.LocalizedStringValueType First { get  {return new ps.LocalizedStringValueType(owner.GetElementFirst(info));} }
+			public ps.LocalizedStringValueType Last { get {return new ps.LocalizedStringValueType(owner.GetElementLast(info));} }
+			public ps.LocalizedStringValueType Append(){return new ps.LocalizedStringValueType(owner.CreateElement(info));}
+			public ps.LocalizedStringValueType AppendWithPrefix(string prefix) {return new ps.LocalizedStringValueType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.LocalizedStringValueType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
 		public MemberElement_RangeValue RangeValue;
 		public class MemberElement_RangeValue : System.Collections.IEnumerable
 		{
@@ -1941,25 +2288,25 @@ namespace ps
 		
 	} // class TypeConverterAttribute
 
-	public class UnitsConverterAttribute : Altova.Xml.ElementType
+	public class TypeDescriptionProviderAttribute : Altova.Xml.ElementType
 	{
-		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_UnitsConverterAttribute]); }}
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_TypeDescriptionProviderAttribute]); }}
 
 
-		public UnitsConverterAttribute(System.Xml.XmlNode init) : base(init)
+		public TypeDescriptionProviderAttribute(System.Xml.XmlNode init) : base(init)
  		{
 			instantiateMembers();
 		} 
 		
 		private void instantiateMembers()
 		{
-			Type_AssemblyQualifiedName = new MemberAttribute_Type_AssemblyQualifiedName (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_UnitsConverterAttribute_altova_Type_AssemblyQualifiedName]);
+			Type_AssemblyQualifiedName = new MemberAttribute_Type_AssemblyQualifiedName (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_TypeDescriptionProviderAttribute_altova_Type_AssemblyQualifiedName]);
 
 		}
 
 		internal class Enumerator : EnumeratorBase { 
 			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
-			public override object Current { get { return new UnitsConverterAttribute((System.Xml.XmlNode)InnerCurrent); } }
+			public override object Current { get { return new TypeDescriptionProviderAttribute((System.Xml.XmlNode)InnerCurrent); } }
 		}
 
 		// Attributes
@@ -1987,10 +2334,10 @@ namespace ps
 		public void SetXsiType() 
 		{ 
 			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
-				new System.Xml.XmlQualifiedName("UnitsConverterAttribute", "ETS.EMQuest.Parameters.xsd")); 				
+				new System.Xml.XmlQualifiedName("TypeDescriptionProviderAttribute", "ETS.EMQuest.Parameters.xsd")); 				
 		}
 		
-	} // class UnitsConverterAttribute
+	} // class TypeDescriptionProviderAttribute
 
 	public class UserRoleAttribute : xs.stringType
 	{
@@ -2094,6 +2441,296 @@ namespace ps
 		
 	} // class ValidationRuleAttribute
 
+	public class ValueRestriction_Boolean : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueRestriction_Boolean]); }}
+
+
+		public ValueRestriction_Boolean(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			BooleanValue = new MemberElement_BooleanValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueRestriction_Boolean_altova_BooleanValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new ValueRestriction_Boolean((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_BooleanValue BooleanValue;
+		public class MemberElement_BooleanValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_BooleanValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public xs.booleanType this [int i] { get { return At(i);} } 
+			public xs.booleanType At(int index) {return new xs.booleanType(owner.GetElementAt(info, index));}
+			public xs.booleanType First { get  {return new xs.booleanType(owner.GetElementFirst(info));} }
+			public xs.booleanType Last { get {return new xs.booleanType(owner.GetElementLast(info));} }
+			public xs.booleanType Append(){return new xs.booleanType(owner.CreateElement(info));}
+			public xs.booleanType AppendWithPrefix(string prefix) {return new xs.booleanType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new xs.booleanType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("ValueRestriction.Boolean", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class ValueRestriction_Boolean
+
+	public class ValueRestriction_Dll : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueRestriction_Dll]); }}
+
+
+		public ValueRestriction_Dll(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueRestriction_Dll_altova_StringValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new ValueRestriction_Dll((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_StringValue StringValue;
+		public class MemberElement_StringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_StringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.StringValueType2 this [int i] { get { return At(i);} } 
+			public ps.StringValueType2 At(int index) {return new ps.StringValueType2(owner.GetElementAt(info, index));}
+			public ps.StringValueType2 First { get  {return new ps.StringValueType2(owner.GetElementFirst(info));} }
+			public ps.StringValueType2 Last { get {return new ps.StringValueType2(owner.GetElementLast(info));} }
+			public ps.StringValueType2 Append(){return new ps.StringValueType2(owner.CreateElement(info));}
+			public ps.StringValueType2 AppendWithPrefix(string prefix) {return new ps.StringValueType2(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.StringValueType2.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("ValueRestriction.Dll", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class ValueRestriction_Dll
+
+	public class ValueRestriction_Int : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueRestriction_Int]); }}
+
+
+		public ValueRestriction_Int(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			IntValue = new MemberElement_IntValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueRestriction_Int_altova_IntValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new ValueRestriction_Int((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_IntValue IntValue;
+		public class MemberElement_IntValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_IntValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public xs.intType this [int i] { get { return At(i);} } 
+			public xs.intType At(int index) {return new xs.intType(owner.GetElementAt(info, index));}
+			public xs.intType First { get  {return new xs.intType(owner.GetElementFirst(info));} }
+			public xs.intType Last { get {return new xs.intType(owner.GetElementLast(info));} }
+			public xs.intType Append(){return new xs.intType(owner.CreateElement(info));}
+			public xs.intType AppendWithPrefix(string prefix) {return new xs.intType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new xs.intType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("ValueRestriction.Int", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class ValueRestriction_Int
+
+	public class ValueRestriction_String : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueRestriction_String]); }}
+
+
+		public ValueRestriction_String(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueRestriction_String_altova_StringValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new ValueRestriction_String((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_StringValue StringValue;
+		public class MemberElement_StringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_StringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public xs.stringType this [int i] { get { return At(i);} } 
+			public xs.stringType At(int index) {return new xs.stringType(owner.GetElementAt(info, index));}
+			public xs.stringType First { get  {return new xs.stringType(owner.GetElementFirst(info));} }
+			public xs.stringType Last { get {return new xs.stringType(owner.GetElementLast(info));} }
+			public xs.stringType Append(){return new xs.stringType(owner.CreateElement(info));}
+			public xs.stringType AppendWithPrefix(string prefix) {return new xs.stringType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new xs.stringType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("ValueRestriction.String", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class ValueRestriction_String
+
+	public class ValueRestriction_Txt : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueRestriction_Txt]); }}
+
+
+		public ValueRestriction_Txt(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueRestriction_Txt_altova_StringValue]);
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new ValueRestriction_Txt((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+
+
+		// Elements
+	
+		public MemberElement_StringValue StringValue;
+		public class MemberElement_StringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_StringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.StringValueType4 this [int i] { get { return At(i);} } 
+			public ps.StringValueType4 At(int index) {return new ps.StringValueType4(owner.GetElementAt(info, index));}
+			public ps.StringValueType4 First { get  {return new ps.StringValueType4(owner.GetElementFirst(info));} }
+			public ps.StringValueType4 Last { get {return new ps.StringValueType4(owner.GetElementLast(info));} }
+			public ps.StringValueType4 Append(){return new ps.StringValueType4(owner.CreateElement(info));}
+			public ps.StringValueType4 AppendWithPrefix(string prefix) {return new ps.StringValueType4(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.StringValueType4.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("ValueRestriction.Txt", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class ValueRestriction_Txt
+
 	public class ValueType : Altova.Xml.ElementType
 	{
 		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_ValueType]); }}
@@ -2114,6 +2751,7 @@ namespace ps
 			IntValue = new MemberElement_IntValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_IntValue]);
 			ObjectValue = new MemberElement_ObjectValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_ObjectValue]);
 			StringValue = new MemberElement_StringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_StringValue]);
+			LocalizedStringValue = new MemberElement_LocalizedStringValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_LocalizedStringValue]);
 			RangeValue = new MemberElement_RangeValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_RangeValue]);
 			TypeValue = new MemberElement_TypeValue (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_ValueType_altova_TypeValue]);
 		}
@@ -2292,6 +2930,30 @@ namespace ps
 			public System.Collections.IEnumerator GetEnumerator()
 			{
 				return new xs.stringType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}	
+		public MemberElement_LocalizedStringValue LocalizedStringValue;
+		public class MemberElement_LocalizedStringValue : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_LocalizedStringValue (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.DisplayNameTypeType this [int i] { get { return At(i);} } 
+			public ps.DisplayNameTypeType At(int index) {return new ps.DisplayNameTypeType(owner.GetElementAt(info, index));}
+			public ps.DisplayNameTypeType First { get  {return new ps.DisplayNameTypeType(owner.GetElementFirst(info));} }
+			public ps.DisplayNameTypeType Last { get {return new ps.DisplayNameTypeType(owner.GetElementLast(info));} }
+			public ps.DisplayNameTypeType Append(){return new ps.DisplayNameTypeType(owner.CreateElement(info));}
+			public ps.DisplayNameTypeType AppendWithPrefix(string prefix) {return new ps.DisplayNameTypeType(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.DisplayNameTypeType.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
 			}
 
 			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
@@ -2735,6 +3397,52 @@ namespace ps
 		
 	} // class spaceType
 
+	public class DisplayNameTypeType : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_DisplayNameTypeType]); }}
+
+
+		public DisplayNameTypeType(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new DisplayNameTypeType((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public string Value
+		{
+			get 
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DisplayNameTypeType_altova_unnamed];
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Node, member);
+			}
+			set
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DisplayNameTypeType_altova_unnamed];
+				Altova.Xml.XmlTreeOperations.SetValue(Node, member, value);
+			}
+		}
+
+
+		// Elements
+	
+		public void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("DisplayNameType", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class DisplayNameTypeType
+
 	public class TypeValueType : Altova.Xml.ElementType
 	{
 		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_TypeValueType]); }}
@@ -2798,12 +3506,12 @@ namespace ps
 		
 	} // class TypeValueType
 
-	public class DisplayNameTypeType : Altova.Xml.ElementType
+	public class PropertyType2 : Altova.Xml.ElementType
 	{
-		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_DisplayNameTypeType]); }}
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_PropertyType2]); }}
 
 
-		public DisplayNameTypeType(System.Xml.XmlNode init) : base(init)
+		public PropertyType2(System.Xml.XmlNode init) : base(init)
  		{
 			instantiateMembers();
 		} 
@@ -2811,38 +3519,44 @@ namespace ps
 		private void instantiateMembers()
 		{
 
+			Value2 = new MemberElement_Value2 (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_PropertyType2_altova_Value2]);
 		}
 
 		internal class Enumerator : EnumeratorBase { 
 			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
-			public override object Current { get { return new DisplayNameTypeType((System.Xml.XmlNode)InnerCurrent); } }
+			public override object Current { get { return new PropertyType2((System.Xml.XmlNode)InnerCurrent); } }
 		}
 
 		// Attributes
-		public string Value
-		{
-			get 
-			{
-				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DisplayNameTypeType_altova_unnamed];
-				return (string)Altova.Xml.XmlTreeOperations.CastToString(Node, member);
-			}
-			set
-			{
-				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_DisplayNameTypeType_altova_unnamed];
-				Altova.Xml.XmlTreeOperations.SetValue(Node, member, value);
-			}
-		}
 
 
 		// Elements
 	
-		public void SetXsiType() 
-		{ 
-			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
-				new System.Xml.XmlQualifiedName("DisplayNameType", "ETS.EMQuest.Parameters.xsd")); 				
-		}
-		
-	} // class DisplayNameTypeType
+		public MemberElement_Value2 Value2;
+		public class MemberElement_Value2 : System.Collections.IEnumerable
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info;
+			public MemberElement_Value2 (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) { this.owner = owner; this.info = info;}
+			public ps.ValueRestriction_Boolean this [int i] { get { return At(i);} } 
+			public ps.ValueRestriction_Boolean At(int index) {return new ps.ValueRestriction_Boolean(owner.GetElementAt(info, index));}
+			public ps.ValueRestriction_Boolean First { get  {return new ps.ValueRestriction_Boolean(owner.GetElementFirst(info));} }
+			public ps.ValueRestriction_Boolean Last { get {return new ps.ValueRestriction_Boolean(owner.GetElementLast(info));} }
+			public ps.ValueRestriction_Boolean Append(){return new ps.ValueRestriction_Boolean(owner.CreateElement(info));}
+			public ps.ValueRestriction_Boolean AppendWithPrefix(string prefix) {return new ps.ValueRestriction_Boolean(owner.CreateElement(prefix, info.LocalName, info.NamespaceURI));}
+			public bool Exists { get {return Count > 0;} }
+			public int Count { get {return owner.CountElement(info);} }
+			public void Remove() {owner.RemoveElement(info);}
+			public void RemoveAt(int index) { owner.RemoveElementAt(info, index); }
+
+			public System.Collections.IEnumerator GetEnumerator()
+			{
+				return new ps.ValueRestriction_Boolean.Enumerator(Altova.Xml.XmlTreeOperations.GetElements(owner.Node, info).GetEnumerator());
+			}
+
+			public Altova.Xml.Meta.Element Info { get { return new Altova.Xml.Meta.Element(info); } }
+		}		
+	} // class PropertyType2
 
 	public class NameTypeType : Altova.Xml.ElementType
 	{
@@ -3287,6 +4001,57 @@ namespace ps
 		
 	} // class StringValueType
 
+	public class LocalizedStringValueType : ps.DisplayNameTypeType
+	{
+		public static new Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_LocalizedStringValueType]); }}
+
+
+		public LocalizedStringValueType(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+			Name = new MemberAttribute_Name (this, Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_LocalizedStringValueType_altova_Name]);
+
+		}
+
+		internal new class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new LocalizedStringValueType((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public MemberAttribute_Name Name;
+		public class MemberAttribute_Name
+		{
+			private Altova.Xml.TypeBase owner;
+			private Altova.TypeInfo.MemberInfo info; 
+			public MemberAttribute_Name (Altova.Xml.TypeBase owner, Altova.TypeInfo.MemberInfo info) {this.owner = owner; this.info = info;}
+			public string Value { get {
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Altova.Xml.XmlTreeOperations.FindAttribute(owner.Node, info), info);			
+			}
+			set {	
+				Altova.Xml.XmlTreeOperations.SetValue(owner.Node, info, value);		
+			} }
+			public bool Exists() {return owner.GetAttribute(info) != null;}
+			public void Remove() {owner.RemoveAttribute(info);} 
+
+			public Altova.Xml.Meta.Attribute Info { get { return new Altova.Xml.Meta.Attribute(info); } }
+		}
+
+
+		// Elements
+	
+		public new void SetXsiType() 
+		{ 
+			Altova.Xml.XmlTreeOperations.SetAttribute(Node, "xsi:type", "http://www.w3.org/2001/XMLSchema-instance", 
+				new System.Xml.XmlQualifiedName("DisplayNameType", "ETS.EMQuest.Parameters.xsd")); 				
+		}
+		
+	} // class LocalizedStringValueType
+
 	public class RangeValueType2 : ps.RangeValueType
 	{
 		public static new Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_RangeValueType2]); }}
@@ -3412,6 +4177,132 @@ namespace ps
 		// Elements
 		
 	} // class TypeValueType2
+
+	public class StringValueType2 : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_StringValueType2]); }}
+
+
+		public StringValueType2(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new StringValueType2((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public string Value
+		{
+			get 
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_StringValueType2_altova_unnamed];
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Node, member);
+			}
+			set
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_StringValueType2_altova_unnamed];
+				Altova.Xml.XmlTreeOperations.SetValue(Node, member, value);
+			}
+		}
+
+
+		// Elements
+		
+	} // class StringValueType2
+
+	public class StringValueType3 : Altova.Xml.TypeBase
+	{
+		public static Altova.Xml.Meta.SimpleType StaticInfo { get { return new Altova.Xml.Meta.SimpleType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_StringValueType3]); }}
+
+
+		public StringValueType3(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+		}
+
+
+		// Attributes
+
+
+		// Elements
+		
+	} // class StringValueType3
+
+	public class StringValueType4 : Altova.Xml.ElementType
+	{
+		public static Altova.Xml.Meta.ComplexType StaticInfo { get { return new Altova.Xml.Meta.ComplexType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_StringValueType4]); }}
+
+
+		public StringValueType4(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+		}
+
+		internal class Enumerator : EnumeratorBase { 
+			public Enumerator(System.Collections.IEnumerator inner) : base(inner) {}
+			public override object Current { get { return new StringValueType4((System.Xml.XmlNode)InnerCurrent); } }
+		}
+
+		// Attributes
+		public string Value
+		{
+			get 
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_StringValueType4_altova_unnamed];
+				return (string)Altova.Xml.XmlTreeOperations.CastToString(Node, member);
+			}
+			set
+			{
+				Altova.TypeInfo.MemberInfo member = Parameters_TypeInfo.binder.Members[Parameters_TypeInfo._altova_mi_ps_altova_StringValueType4_altova_unnamed];
+				Altova.Xml.XmlTreeOperations.SetValue(Node, member, value);
+			}
+		}
+
+
+		// Elements
+		
+	} // class StringValueType4
+
+	public class StringValueType5 : Altova.Xml.TypeBase
+	{
+		public static Altova.Xml.Meta.SimpleType StaticInfo { get { return new Altova.Xml.Meta.SimpleType(Parameters_TypeInfo.binder.Types[Parameters_TypeInfo._altova_ti_ps_altova_StringValueType5]); }}
+
+
+		public StringValueType5(System.Xml.XmlNode init) : base(init)
+ 		{
+			instantiateMembers();
+		} 
+		
+		private void instantiateMembers()
+		{
+
+		}
+
+
+		// Attributes
+
+
+		// Elements
+		
+	} // class StringValueType5
 
 
 } // namespace ps

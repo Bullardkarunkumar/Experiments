@@ -235,11 +235,15 @@
     <Compile Include="Positioner\ETSPositionerSpecificProperties.cs" />
     <Compile Include="Positioner\SimulatedPositioner.cs" />
     <Compile Include="Positioner\SimulatedPositionerSpecificProperties.cs" />
+    <Compile Include="Positioner\VisaGrpcConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PositionerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Protobuf Include="..\..\GrpcVisa\Protos\visa.proto">
+      <Link>Protos\visa.proto</Link>
+    </Protobuf>
     <None Include="packages.config" />
     <Protobuf Include="..\ETSGrpcPositioner\Protos\positioners.proto" GrpcServices="Server">
       <Link>Protos\positioners.proto</Link>

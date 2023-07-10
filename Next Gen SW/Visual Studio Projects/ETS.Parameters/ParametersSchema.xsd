@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Created with Liquid XML Studio Developer Edition (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:ps="ETS.EMQuest.Parameters.xsd" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="ETS.EMQuest.Parameters.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="ETS.EMQuest.Parameters.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" id="Parameters">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	<xs:complexType name="RangeValueType">
+		<xs:sequence>
+			<xs:element name="StartValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StopValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StepValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TagValueType">
+		<xs:attribute name="Name" type="xs:string" use="required"/>
+		<xs:attribute name="Value" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ValueType">
+		<xs:choice minOccurs="1" maxOccurs="1">
+			<xs:element name="BooleanValue" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DoubleValue" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="IntValue" type="xs:int" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StringValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<!--User-Role Attribute, comma-separated roles that are allowed to modify an attribute -->
+	<xs:complexType name="EditorAttribute">
+		<xs:attribute name="Type.AssemblyQualifiedName" type="xs:string" use="required"/>
+		<xs:attribute name="BaseType" type="xs:string" use="optional" default="PropertyEditor"/>
+	</xs:complexType>
+	<xs:complexType name="ValidationRuleAttribute">
+		<xs:attribute name="Type.AssemblyQualifiedName" type="xs:string" use="optional"/>
+		<xs:attribute name="Name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="UnitsConverterAttribute">
+		<xs:attribute name="Type.AssemblyQualifiedName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TypeConverterAttribute">
+		<xs:attribute name="Type.AssemblyQualifiedName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RangeAttribute">
+		<xs:complexContent>
+			<xs:restriction base="RangeValueType">
+				<xs:sequence>
+					<xs:element name="StartValue" type="xs:string"/>
+					<xs:element name="StopValue" type="xs:string"/>
+					<xs:element name="StepValue" type="xs:string"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Value" type="ValueType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DisplayName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DisplayOrder" type="xs:unsignedLong" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DefaultValue" type="ValueType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ChoiceList" type="ValueType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Range" type="RangeAttribute" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Browsable" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UserRole" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DisplayUnits" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Format" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Editor" type="EditorAttribute" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ReadOnly" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CommandFormatString" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CommandOrder" type="xs:unsignedLong" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UnitsConverter" type="UnitsConverterAttribute" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Tags" type="TagValueType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ValidationRules" type="ValidationRuleAttribute" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParametersType">
+		<xs:sequence>
+			<xs:element name="Children" type="ParametersType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Properties" type="PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DisplayName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute ref="xml:base"/>
+		<xs:attribute name="Name" type="xs:string" use="optional"/>
+		<xs:attribute name="UserRole" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

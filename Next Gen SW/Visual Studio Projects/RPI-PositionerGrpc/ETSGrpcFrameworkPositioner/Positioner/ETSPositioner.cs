@@ -237,7 +237,7 @@ namespace ETSGrpcPositioner.Positioner
         /// <returns>the connection</returns>
         public override IConnection CreateConnection(Device dev)
         {
-            var conn = new SimulatedConnection();
+            var conn = new VisaGrpcConnection(dev);
 
             PosConnection = conn;
             return conn;

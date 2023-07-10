@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.ComponentModel.Composition;
 using System.Timers;
 
-namespace ETS.EMQuest.Modules.SimulatedPositioner
+namespace ETSGrpcPositioner.Positioner
 {
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace ETS.EMQuest.Modules.SimulatedPositioner
 
         public override string GetIDN()
         {
-            return "ETS-Lindgren Inc. Simulated Positioner";
+            return Properties.Resources.SimulatorIDN;
         }
 
         public override AxisRotation RotationMode

@@ -1,63 +1,81 @@
-using Grpc.Core;
-using PosGrpcService;
-using ETSGrpcPositioner.Positioner;
-using ETS.EMQuest.Modules.SimulatedPositioner;
 using Ets.Instrument;
+using ETSGrpcPositioner.Positioner;
+using Grpc.Core;
 using static Ets.Instrument.Axis;
 
 namespace PosGrpcService.Services
 {
-    public class PositionerService : Positioner.PositionerBase
+    public partial class PositionerService : Positioner.PositionerBase
     {
         private readonly ILogger<PositionerService> _logger;
-        private Axis _positioner;
-        private Configuration _config;
+        private Dictionary<string, Axis> positioners = new Dictionary<string, Axis>();
+        private Dictionary<string, Configuration> configurations = new Dictionary<string, Configuration>();
 
         public PositionerService(ILogger<PositionerService> logger)
         {
             _logger = logger;
-            _positioner = new SimulatedPositioner();
-            _config = new Configuration();
         }
 
         public PositionerService()
         {
-            _positioner = new SimulatedPositioner();
-            _config = new Configuration();
         }
 
         // Server side handler of the GetConfiguration RPC
         public override Task<Configuration> GetConfiguration(NullValue value, ServerCallContext context)
         {
-            Configuration config = new Configuration();
-            return Task.FromResult(_config);
+            Configuration config;
+            if (!configurations.TryGetValue(value.SessionId, out config))
+            {
+                config = new Configuration();
+            }
+            return Task.FromResult(config);
         }
 
         public override Task<BoolValue> SetConfiguration(Configuration config, ServerCallContext context)
         {
-            BoolValue status = new BoolValue();
-            _config = config;
 
-            _positioner.CreateConnection(new Device("ETSPositioner", string.Empty, _config.VisaConnectString));
-            _positioner.SetDevice(config.VisaConnectString);
-            var axisSpecificProps = _positioner.AxisSpecificProperties as ETSPositionerSpecificProperties;
+            BoolValue status = new BoolValue();
+            status.SessionId = config.SessionId;
+
+            Configuration configuration;
+            if (configurations.TryGetValue(config.SessionId, out configuration))
+            {
+                configurations.Remove(config.SessionId);
+            }
+
+            configurations.Add(config.SessionId, config);
+
+            Axis positioner;
+            if (positioners.TryGetValue(config.SessionId, out positioner))
+            {
+                positioners.Remove(config.SessionId);
+                positioner.PosConnection.CloseConnection();
+            }
+
+            positioner = new ETSPositioner();
+            positioners.Add(config.SessionId, positioner);
+
+            var axisSpecificProps = positioner.AxisSpecificProperties as ETSPositionerSpecificProperties;
             if (axisSpecificProps != null)
             {
                 axisSpecificProps.InitParams(config.AxisSpecificProperties);
             }
 
-            status.Value = _positioner.ConnectToDevice(config.VisaConnectString);
+            positioner.CreateConnection(new Device("ETSPositioner", string.Empty, config.VisaConnectString));
+            positioner.SetDevice(config.VisaConnectString);
 
-            _positioner.UpperLimit = config.UpperLimit;
-            _positioner.LowerLimit = config.LowerLimit;
-            _positioner.SetSpeedSettingPercent(1, config.SpeedSetting1);
-            _positioner.SetSpeedSettingPercent(2, config.SpeedSetting2);
-            _positioner.SetSpeedSettingPercent(3, config.SpeedSetting3);
-            _positioner.SetSpeedSettingPercent(4, config.SpeedSetting4);
-            _positioner.SetSpeedSettingPercent(5, config.SpeedSetting5);
-            _positioner.SetSpeedSettingPercent(6, config.SpeedSetting6);
-            _positioner.SetSpeedSettingPercent(7, config.SpeedSetting7);
-            _positioner.SetSpeedSettingPercent(8, config.SpeedSetting8);
+            status.Value = positioner.ConnectToDevice(config.VisaConnectString);
+
+            positioner.UpperLimit = config.UpperLimit;
+            positioner.LowerLimit = config.LowerLimit;
+            positioner.SetSpeedSettingPercent(1, config.SpeedSetting1);
+            positioner.SetSpeedSettingPercent(2, config.SpeedSetting2);
+            positioner.SetSpeedSettingPercent(3, config.SpeedSetting3);
+            positioner.SetSpeedSettingPercent(4, config.SpeedSetting4);
+            positioner.SetSpeedSettingPercent(5, config.SpeedSetting5);
+            positioner.SetSpeedSettingPercent(6, config.SpeedSetting6);
+            positioner.SetSpeedSettingPercent(7, config.SpeedSetting7);
+            positioner.SetSpeedSettingPercent(8, config.SpeedSetting8);
 
             return Task.FromResult<BoolValue>(status);
         }
@@ -65,214 +83,451 @@ namespace PosGrpcService.Services
         public override Task<IntValue> GetRotationMode(NullValue value, ServerCallContext context)
         {
             IntValue mode = new IntValue();
-            mode.Value = (int)_positioner.RotationMode;
+            mode.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(value.SessionId, out positioner))
+            {
+                mode.Value = (int)positioner.RotationMode;
+                mode.SessionId = value.SessionId;
+            }
             return Task.FromResult<IntValue>(mode);
         }
 
         public override Task<NullValue> SetRotationMode(IntValue value, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.RotationMode = (AxisRotation)value.Value;
+            retVal.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(value.SessionId, out positioner))
+            {
+                positioner.RotationMode = (AxisRotation)value.Value;
+                retVal.SessionId = value.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetCP(NullValue request, ServerCallContext context)
         {
             DoubleValue position = new DoubleValue();
-            position.Value = _positioner.CurrentPosition; 
-            return Task.FromResult<DoubleValue>(position); 
+            position.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                position.Value = positioner.CurrentPosition;
+                position.SessionId = request.SessionId;
+            }
+
+            return Task.FromResult<DoubleValue>(position);
         }
 
         public override Task<NullValue> SetCP(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.CurrentPosition = request.Value;    
+            retVal.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.CurrentPosition = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetTargetPosition(NullValue request, ServerCallContext context)
         {
             DoubleValue position = new DoubleValue();
-            position.Value = _positioner.TargetPosition;
+            position.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                position.Value = positioner.TargetPosition;
+                position.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(position);
         }
 
         public override Task<NullValue> SetTargetPosition(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.TargetPosition = request.Value;
+            retVal.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.TargetPosition = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetCWLimit(NullValue request, ServerCallContext context)
         {
             DoubleValue limit = new DoubleValue();
-            limit.Value = _positioner.CwLimit;
+            limit.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                limit.Value = positioner.CwLimit;
+                limit.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(limit);
         }
 
         public override Task<NullValue> SetCWLimit(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.CwLimit = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.CwLimit = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetCCWLimit(NullValue request, ServerCallContext context)
         {
             DoubleValue limit = new DoubleValue();
-            limit.Value = _positioner.CcwLimit;
+            limit.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                limit.Value = positioner.CcwLimit;
+                limit.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(limit);
         }
 
         public override Task<NullValue> SetCCWLimit(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.CcwLimit = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.CcwLimit = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetAccelerationInMS(NullValue request, ServerCallContext context)
         {
             DoubleValue acc = new DoubleValue();
-            acc.Value = _positioner.AccelerationInMS;
+            acc.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                acc.Value = positioner.AccelerationInMS;
+                acc.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(acc);
         }
 
         public override Task<NullValue> SetAccelerationInMS(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.AccelerationInMS = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.AccelerationInMS = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetScanCycles(NullValue request, ServerCallContext context)
         {
             DoubleValue cycles = new DoubleValue();
-            cycles.Value = _positioner.ScanCycles;
+            cycles.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                cycles.Value = positioner.ScanCycles;
+                cycles.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(cycles);
         }
-         
+
         public override Task<NullValue> SetScanCycles(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.ScanCycles = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.ScanCycles = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<IntValue> GetCurrentSpeed(NullValue request, ServerCallContext context)
         {
             IntValue speed = new IntValue();
-            speed.Value = _positioner.CurrentSpeed;
+            speed.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                speed.Value = positioner.CurrentSpeed;
+                speed.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<IntValue>(speed);
         }
 
         public override Task<NullValue> SetCurrentSpeed(IntValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.CurrentSpeed = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.CurrentSpeed = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<DoubleValue> GetCurrentVelocity(NullValue request, ServerCallContext context)
         {
             DoubleValue vel = new DoubleValue();
-            vel.Value = _positioner.Velocity;
+            vel.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                vel.Value = positioner.Velocity;
+                vel.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<DoubleValue>(vel);
         }
 
         public override Task<NullValue> SetCurrentVelocity(DoubleValue request, ServerCallContext context)
         {
             NullValue retVal = new NullValue();
-            _positioner.CurrentVelocity = request.Value;
+            retVal.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.CurrentVelocity = request.Value;
+                retVal.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<NullValue>(retVal);
         }
 
         public override Task<BoolValue> OperationComplete(NullValue request, ServerCallContext context)
         {
             BoolValue status = new BoolValue();
-            status.Value = true;
+            status.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                status.Value = true;
+                status.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<BoolValue>(status);
         }
 
         public override Task<StringValue> Seek(DoubleValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.Seek(request.Value);
+            commandResponse.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.Seek(request.Value);
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
         public override Task<StringValue> SeekPositive(DoubleValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.SeekPositive(request.Value);
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.SeekPositive(request.Value);
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
         public override Task<StringValue> SeekNegative(DoubleValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.SeekNegative(request.Value);
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.SeekNegative(request.Value);
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
         public override Task<StringValue> Clockwise(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.Clockwise();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.Clockwise();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
+
         public override Task<StringValue> CounterClockwise(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.CounterClockwise();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.CounterClockwise();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
         public override Task<StringValue> Stop(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.Stop();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.Stop();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
 
         public override Task<StringValue> Scan(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.Scan();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.Scan();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
         public override Task<BoolValue> Home(NullValue request, ServerCallContext context)
         {
             BoolValue commandResponse = new BoolValue();
-            commandResponse.Value = _positioner.Home();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.Home();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<BoolValue>(commandResponse);
         }
 
         public override Task<BoolValue> IsHomed(NullValue request, ServerCallContext context)
         {
             BoolValue commandResponse = new BoolValue();
-            commandResponse.Value = _positioner.IsHomed;
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.IsHomed;
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<BoolValue>(commandResponse);
         }
 
         public override Task<NullValue> SetSpeedSettingPercent(SpeedSettingValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            _positioner.SetSpeedSettingPercent(request.Setting, request.Value);
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.SetSpeedSettingPercent(request.Setting, request.Value);
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult(new NullValue());
         }
         public override Task<NullValue> ClearDeviceError(NullValue request, ServerCallContext context)
-        { 
-            _positioner.ClearDeviceError();
-            return Task.FromResult(new NullValue());
+        {
+            NullValue retVal = new NullValue();
+            retVal.SessionId = string.Empty;
+
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                positioner.ClearDeviceError();
+                retVal.SessionId = request.SessionId;
+            }
+
+            return Task.FromResult(retVal);
         }
+
         public override Task<StringValue> GetDeviceError(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.GetDeviceError();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.GetDeviceError();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
+
         public override Task<StringValue> GetIDN(NullValue request, ServerCallContext context)
         {
             StringValue commandResponse = new StringValue();
-            commandResponse.Value = _positioner.GetIDN();
+            commandResponse.SessionId = string.Empty;
+            Axis positioner;
+            if (positioners.TryGetValue(request.SessionId, out positioner))
+            {
+                commandResponse.Value = positioner.GetIDN();
+                commandResponse.SessionId = request.SessionId;
+            }
+
             return Task.FromResult<StringValue>(commandResponse);
         }
     }

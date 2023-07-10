@@ -8,8 +8,9 @@ using System.Diagnostics;
 
 using System.ComponentModel.Composition;
 using System.Timers;
+using ETSGrpcPositioner.Positioner;
 
-namespace ETS.EMQuest.Modules.SimulatedPositioner
+namespace ETSGrpcPositioner.Positioner
 {
 
     /// <summary>
@@ -26,7 +27,7 @@ namespace ETS.EMQuest.Modules.SimulatedPositioner
         /// </summary>
         public SimulatedPositioner()
         {
-            this.AxisSpecificProperties = new SimulatedPositionerSpecificProperties();
+            this.AxisSpecificProperties = new ETSPositionerSpecificProperties();
         }
 
         #endregion

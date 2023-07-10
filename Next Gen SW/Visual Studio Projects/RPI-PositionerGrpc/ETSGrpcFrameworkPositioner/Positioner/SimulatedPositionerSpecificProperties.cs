@@ -8,7 +8,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace ETS.EMQuest.Modules.SimulatedPositioner
+namespace ETSGrpcPositioner.Positioner
 {
 
     [TypeConverter(typeof(ExpandableObjectConverter))]

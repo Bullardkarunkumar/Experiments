@@ -2,6 +2,7 @@ using PosGrpcService.Services;
 using Grpc.Core;
 using static PosGrpcService.Positioner;
 using PosGrpcService;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,7 @@ builder.Services.AddSingleton<PositionerService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//app.MapGrpcService<PositionerService>();
+app.MapGrpcService<PositionerService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
 app.UseRouting();
@@ -40,7 +41,7 @@ app.UseCors();
 app.UseEndpoints(endpoints =>
 {
 	// map to and register the gRPC service
-	//endpoints.MapGrpcService<PositionerService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
+	endpoints.MapGrpcService<PositionerService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
 	endpoints.MapRazorPages();
 	endpoints.MapControllers();
 	endpoints.MapFallbackToFile("index.html");
@@ -51,6 +52,6 @@ Server server = new Server
     Services = { PosGrpcService.Positioner.BindService(new PositionerService()) },
     Ports = { new ServerPort("localhost", 30051, ServerCredentials.Insecure) }
 };
-
 server.Start();
+
 app.Run();

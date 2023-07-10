@@ -8,13 +8,13 @@
     /// </summary>
     public partial class Coordinate
     {
-        [JsonProperty("@xmlns:ps")]
+        [JsonProperty("xmlns:ps")]
         public object XmlnsPs { get; set; }
 
-        [JsonProperty("@xmlns:xml")]
+        [JsonProperty("xmlns:xml")]
         public object XmlnsXml { get; set; }
 
-        [JsonProperty("@xmlns:xs")]
+        [JsonProperty("xmlns:xs")]
         public object XmlnsXs { get; set; }
 
         [JsonProperty("Parameters", NullValueHandling = NullValueHandling.Ignore)]
@@ -29,7 +29,7 @@
         [JsonProperty("UserRole", NullValueHandling = NullValueHandling.Ignore)]
         public string UserRole { get; set; }
 
-        [JsonProperty("@xml:base", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("xml:base", NullValueHandling = NullValueHandling.Ignore)]
         public string XmlBase { get; set; }
 
         [JsonProperty("Children", NullValueHandling = NullValueHandling.Ignore)]
@@ -43,6 +43,117 @@
 
         [JsonProperty("Properties", NullValueHandling = NullValueHandling.Ignore)]
         public List<PropertyElement> Properties { get; set; }
+
+        public PropertyElement? GetPropertyElement(Queue<string> names)
+        {
+            var name = names.Dequeue();
+            // Check properties first
+            if (Properties != null && Properties.Count > 0)
+            {
+                foreach (var property in Properties)
+                {
+                    if (property.Name == name)
+                    {
+                        return property;
+                    }
+                }
+            }
+
+            // Check parameter group names
+            if (Children != null && Children.Count > 0) 
+            { 
+                foreach (var parameter in Children)
+                {
+                    if (parameter.Name == name)
+                    {
+                        return parameter.GetPropertyElement(names);
+                    }
+                } 
+            }
+
+            return null;
+        }
+
+        public double? GetPropertyAsDouble(string name)
+        {
+            Queue<string> names = new Queue<string>();
+            var tree = name.Split('.');
+            foreach (var item in tree)
+            {
+                names.Enqueue(item);
+            }
+            
+            double? result = null;
+
+            var property = GetPropertyElement(names);
+            if (property != null)
+            {
+                result = property.Value.DoubleValue;
+            }
+
+            return result;
+        }
+
+        public string? GetPropertyAsString(string name)
+        {
+            Queue<string> names = new Queue<string>();
+            var tree = name.Split('.');
+            foreach (var item in tree)
+            {
+                names.Enqueue(item);
+            }
+
+            string? result = null;
+
+            var property = GetPropertyElement(names);
+            if (property != null)
+            {
+                result = property.Value.StringValue;
+            }
+
+            return result;
+        }
+
+        public long? GetPropertyAsLong(string name)
+        {
+            Queue<string> names = new Queue<string>();
+            var tree = name.Split('.');
+            foreach (var item in tree)
+            {
+                names.Enqueue(item);
+            }
+
+            long? result = null;
+
+            var property = GetPropertyElement(names);
+            if (property != null)
+            {
+                result = property.Value.IntValue;
+            }
+
+            return result;
+        }
+
+        public bool? GetPropertyAsBool(string name)
+        {
+            Queue<string> names = new Queue<string>();
+            var tree = name.Split('.');
+            foreach (var item in tree)
+            {
+                names.Enqueue(item);
+            }
+
+            bool? result = null;
+
+            var property = GetPropertyElement(names);
+            if (property != null)
+            {
+                result = property.Value.BooleanValue;
+            }
+
+            return result;
+        }
+
     }
 
     public partial class PropertyElement
@@ -51,7 +162,7 @@
         public bool? Browsable { get; set; }
 
         [JsonProperty("ChoiceList", NullValueHandling = NullValueHandling.Ignore)]
-        public ChoiceList ChoiceList { get; set; }
+        public List<ValueType> ChoiceList { get; set; }
 
         [JsonProperty("CommandFormatString", NullValueHandling = NullValueHandling.Ignore)]
         public string CommandFormatString { get; set; }
@@ -60,7 +171,7 @@
         public long? CommandOrder { get; set; }
 
         [JsonProperty("DefaultValue", NullValueHandling = NullValueHandling.Ignore)]
-        public ChoiceList DefaultValue { get; set; }
+        public ValueType DefaultValue { get; set; }
 
         [JsonProperty("Description", NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; set; }
@@ -102,10 +213,10 @@
         public List<ValidationRuleElement> ValidationRules { get; set; }
 
         [JsonProperty("Value")]
-        public ChoiceList Value { get; set; }
+        public ValueType Value { get; set; }
     }
 
-    public partial class ChoiceList
+    public partial class ValueType
     {
         [JsonProperty("BooleanValue", NullValueHandling = NullValueHandling.Ignore)]
         public bool? BooleanValue { get; set; }
@@ -122,10 +233,10 @@
 
     public partial class Editor
     {
-        [JsonProperty("@BaseType", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("BaseType", NullValueHandling = NullValueHandling.Ignore)]
         public string BaseType { get; set; }
 
-        [JsonProperty("@Type.AssemblyQualifiedName")]
+        [JsonProperty("Type.AssemblyQualifiedName")]
         public string TypeAssemblyQualifiedName { get; set; }
     }
 
@@ -143,13 +254,16 @@
 
     public partial class TagElement
     {
-        [JsonProperty("Name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("Name")]
         public string Name { get; set; }
+
+        [JsonProperty("Value")]
+        public string Value { get; set; }
     }
 
     public partial class UnitsConverter
     {
-        [JsonProperty("@Type.AssemblyQualifiedName")]
+        [JsonProperty("Type.AssemblyQualifiedName")]
         public string TypeAssemblyQualifiedName { get; set; }
     }
 
@@ -158,9 +272,7 @@
         [JsonProperty("Name")]
         public string Name { get; set; }
 
-        [JsonProperty("@Type.AssemblyQualifiedName", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("Type.AssemblyQualifiedName", NullValueHandling = NullValueHandling.Ignore)]
         public string TypeAssemblyQualifiedName { get; set; }
     }
-
-
 }

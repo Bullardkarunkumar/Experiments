@@ -10,7 +10,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace ETSGrpcPositioner.Positioner
 {
-    public class ETSPositioner : Axis
+    public partial class ETSPositioner : Axis
     {
 
         #region Constructors
@@ -268,6 +268,8 @@ namespace ETSGrpcPositioner.Positioner
         public override bool InitDeviceSpecific()
         {
             _maxSpeed = 150;  // degrees per second (25 RPM)    
+
+            Trace.WriteLine(InitializeModuleText);
 
             string id = QueryPositioner("*IDN?");
             if (!(id.Contains("ETS-Lindgren")))
