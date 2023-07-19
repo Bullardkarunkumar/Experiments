@@ -1,0 +1,51 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ETSGrpcSwitch";
+
+package temswitch;
+
+service TemSwitch
+{
+    //verifyIDN 
+    // rpc VerifyIDN (NullValue) returns (NullValue);
+    rpc DoOnFirstInit (EmptyValue) returns (NullValue);
+    rpc DoOnSubsequentInit (EmptyValue) returns (NullValue);
+    rpc Finalize (EmptyValue) returns (NullValue);
+            rpc SetState (StateValue) returns (NullValue);
+            rpc GetState (SwitchValue) returns (SwitchValue);
+
+        //void SetStateVector(char[] states);
+        //void SetStateVector(int iState) { TSwitchDriver::SetStateVector(iState); };        
+
+        //string GetStateVector();
+        //void SetState(int moduleIndex, int switchNum, int iState);
+        //void SetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType, int state);
+        //int GetState(int moduleIndex, int switchNum);
+        //int GetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType);
+        //int ReturnPortCount();
+        ////const TModuleInfo* GetModuleList() { return Modules; }
+        //int GetStateFromResult(string result, int switchType);
+        //string GetStateStrFromState(int iState, int SwitchType);
+        //string ErrorMessage(string error);
+        //int CheckInterlock();
+        //int IsInterlockEquipment() { return 1; }
+}
+
+message StateValue 
+{
+	int32 switchNum = 1;
+	int32 iState = 2;
+}
+message SwitchValue 
+{
+	int32 switchNum = 1;
+}
+
+message NullValue
+{
+	string result = 1;
+}
+message EmptyValue
+{
+
+}

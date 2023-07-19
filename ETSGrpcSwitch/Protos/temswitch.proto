@@ -1,0 +1,64 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ETSGrpcSwitch";
+
+package temswitch;
+
+service TemSwitch
+{
+    rpc GetModuleTypeInfo(NullValue) returns (TModuleInfoValues);
+    rpc DoOnFirstInit (NullValue) returns (NullValue);
+    rpc SetStateVector(ArrayWithNotSupportedTypes) returns (NullValue);
+    rpc GetStateVector(NullValue) returns (NullValue);
+    rpc CheckInterlock(NullValue) returns (IntValue);
+}
+
+message NullValue
+{	
+}
+
+message IntValue
+{	
+	int32 value = 1;
+}
+
+message TEMSModuleTypeValue 
+{
+    enum TEMSModuleType{
+     EMSType_Unused = 0;
+     EMSType_2XSP2T =1;
+     EMSType_4XSP2T =2;
+     EMSType_2XSP6T =3;
+     EMSType_EMControl =4;
+     EMSType_1XSP6T =5;
+     EMSType_1XSP2T =6;  
+    }
+    optional TEMSModuleType type = 1;
+  optional bytes data = 2; 
+}
+
+message TModuleInfoValue
+    {
+        repeated TEMSModuleTypeValue ModuleType=1;  // The module type
+        int32 RelayCount =2;             // How many Relays in each module
+        int32 StateCount =3;             // How many states each relay has
+        int32 FirstState =4;             // Indicates whether the relay state is 0 or 1 based
+        int32 EMCSlotNum =5;             // Slot number in the EMCenter   1 to 7
+        int32 EMCenterNum =6;           // EMCenter Number or Address    0 to 9 (0 is the master)
+        int32 FirstSwitchNum =7;        // Firt Switch number in the module
+    } 
+
+message TModuleInfoValues{
+    repeated TModuleInfoValue tModuleInfoValue=1;
+}
+
+message ArrayWithNotSupportedTypes
+{
+  enum Type {
+    CHAR = 0;
+    INT8 = 1;
+    INT16 = 2;
+  }
+  optional Type type = 1;
+  optional bytes data = 2; 
+}
