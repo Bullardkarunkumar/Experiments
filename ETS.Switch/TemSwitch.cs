@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using ETS.SwitchFramework;
 
 namespace ETS.Switch
@@ -28,7 +26,7 @@ namespace ETS.Switch
         int SwitchCount { get; set; }
         string SrcName { get; set; }
         bool UseShadow { get; set; }
-        long SwitchedTime { get; set; }
+        //long SwitchedTime { get; set; }
         string ExEquipName { set; get; }
         string EquipmentName { set; get; }
         bool BVisaAsyncLocalOverride { get; set; }
@@ -39,7 +37,7 @@ namespace ETS.Switch
     }
     public class TemSwitch : TSwitchDriver, ITemSwitch
     {
-        TSwitchDriver switchDriver;
+        readonly TSwitchDriver switchDriver;
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="TemSwitch"/> class.
@@ -53,7 +51,9 @@ namespace ETS.Switch
             /// </summary>
             _init();
         }
-
+        /// <summary>
+        /// _inits this instance.
+        /// </summary>
         public void _init()
         {
             //Default values 
@@ -74,14 +74,20 @@ namespace ETS.Switch
                 SrcName = "TCPIP::" + parameter.GetASParameter(TDataAwareTypes.szIPAddress) + "::INSTR";
             }
             Config = parameter.GetASParameter(TDataAwareTypes.szUserInitConfig, ParametersTypeInfo.DEFAULT_CONFIG_STRING);
-            SetModuleTypeInfo();
             Modules = SetModules();
+            SetModuleTypeInfo();
         }
 
         #endregion
 
-        #region Properties
+        #region Properties        
         bool _mbIsVISA { get; set; }
+        /// <summary>
+        /// Gets or sets the MbIsVISA value.
+        /// </summary>
+        /// <value>
+        /// The current MbIsVISA.
+        /// </value>
         virtual public bool MbIsVISA
         {
             get
@@ -93,8 +99,13 @@ namespace ETS.Switch
                 _mbIsVISA = value;
             }
         }
-
         string _config { get; set; }
+        /// <summary>
+        /// Gets or sets the Config value.
+        /// </summary>
+        /// <value>
+        /// The current Config.
+        /// </value>
         public string Config
         {
             get
@@ -106,8 +117,13 @@ namespace ETS.Switch
                 _config = value;
             }
         }
-
         int _slotNum { get; set; }
+        /// <summary>
+        /// Gets or sets the SlotNum value.
+        /// </summary>
+        /// <value>
+        /// The current SlotNum.
+        /// </value>
         virtual public int SlotNum
         {
             get
@@ -121,6 +137,12 @@ namespace ETS.Switch
         }
 
         int _emCenterNum { get; set; }
+        /// <summary>
+        /// Gets or sets the Em Center Number value.
+        /// </summary>
+        /// <value>
+        /// The EmCenterNumber.
+        /// </value>
         virtual public int EmcenterNum
         {
             get
@@ -134,6 +156,12 @@ namespace ETS.Switch
         }
 
         int _moduleIndex { get; set; }
+        /// <summary>
+        /// Gets or sets the ModuleIndex increment value.
+        /// </summary>
+        /// <value>
+        /// The ModuleIndex.
+        /// </value>
         virtual public int ModuleIndex
         {
             get
@@ -147,6 +175,12 @@ namespace ETS.Switch
         }
 
         int _totalSwitchCount { get; set; }
+        /// <summary>
+        /// Gets or sets the Total number of Switch Count.
+        /// </summary>
+        /// <value>
+        /// The TotalSwitchCount.
+        /// </value>
         virtual public int TotalSwitchCount
         {
             get
@@ -160,6 +194,12 @@ namespace ETS.Switch
         }
 
         int _switchCount { get; set; }
+        /// <summary>
+        /// Gets or sets the Switch Count.
+        /// </summary>
+        /// <value>
+        /// The Switch Count.
+        /// </value>
         virtual public int SwitchCount
         {
             get
@@ -173,6 +213,12 @@ namespace ETS.Switch
         }
 
         string _srcName { get; set; }
+        /// <summary>
+        /// Gets or sets the Source Name from path.
+        /// </summary>
+        /// <value>
+        /// The Source Name.
+        /// </value>
         virtual public string SrcName
         {
             get
@@ -186,6 +232,12 @@ namespace ETS.Switch
         }
 
         TModuleInfo[] _modules { get; set; }
+        /// <summary>
+        /// Declare the Modules.
+        /// </summary>
+        /// <value>
+        /// The Modules.
+        /// </value>
         public TModuleInfo[] Modules
         {
             get
@@ -198,6 +250,12 @@ namespace ETS.Switch
             }
         }
         Dictionary<int, int> _stateShadow { get; set; }
+        /// <summary>
+        /// Assign and Verify the current state.
+        /// </summary>
+        /// <value>
+        /// The StateShadow.
+        /// </value>
         public Dictionary<int, int> StateShadow
         {
             get
@@ -210,6 +268,12 @@ namespace ETS.Switch
             }
         }
         TModuleInfo[] _moduleTypeInfo { get; set; }
+        /// <summary>
+        /// Declare the ModuleTypeInfo Vales.
+        /// </summary>
+        /// <value>
+        /// The ModuleTypeInfo.
+        /// </value>
         public TModuleInfo[] ModuleTypeInfo
         {
             get
@@ -223,6 +287,12 @@ namespace ETS.Switch
 
         }
         int[] _moduleInfoIndex { get; set; }
+        /// <summary>
+        /// To find out which module this is in.
+        /// </summary>
+        /// <value>
+        /// The ModuleInfoIndex.
+        /// </value>
         public int[] ModuleInfoIndex
         {
             get
@@ -237,6 +307,12 @@ namespace ETS.Switch
         }
 
         bool _useShadow { get; set; }
+        /// <summary>
+        /// To find out which module this is in.
+        /// </summary>
+        /// <value>
+        /// The ModuleInfoIndex.
+        /// </value>
         public bool UseShadow
         {
             get
@@ -248,20 +324,14 @@ namespace ETS.Switch
                 _useShadow = value;
             }
         }
-        long _switchedTime { get; set; }
-        public long SwitchedTime
-        {
-            get
-            {
-                return _switchedTime;
-            }
-            set
-            {
-                _switchedTime = value;
-            }
-        }
 
         string _exEquipName { get; set; }
+        /// <summary>
+        /// Get or Set Equipment name.
+        /// </summary>
+        /// <value>
+        /// The ExEquipName.
+        /// </value>
         public string ExEquipName
         {
             get
@@ -274,6 +344,12 @@ namespace ETS.Switch
             }
         }
         string _equipmentName { get; set; }
+        /// <summary>
+        /// Get or Set Equipment name.
+        /// </summary>
+        /// <value>
+        /// The ExEquipName.
+        /// </value>
         public string EquipmentName
         {
             get
@@ -286,6 +362,12 @@ namespace ETS.Switch
             }
         }
         bool _bVisaAsyncLocalOverride { get; set; }
+        /// <summary>
+        /// Get or Set Verify IDN call failed status.
+        /// </summary>
+        /// <value>
+        /// The BVisaAsyncLocalOverride.
+        /// </value>
         public bool BVisaAsyncLocalOverride
         {
             get
@@ -298,10 +380,234 @@ namespace ETS.Switch
             }
         }
 
-
         #endregion
 
-        #region Methods
+        #region Methods   
+        /// <summary>
+        /// Return ModuleTypeInfo Array
+        /// </summary>
+        /// <returns>TModuleInfo[]</returns>
+        public TModuleInfo[] GetModuleTypeInfo()
+        {
+            return ModuleTypeInfo;
+        }
+        /// <summary>
+        /// Verify IDN recurrent
+        /// </summary>
+        public void DoOnFirstInit()
+        {
+            try
+            {
+                try
+                {
+                    // Verify the presence of the correct EMSwitch cards in the EMCenters, i.e., verify the configuration
+                    VerifyIDN();
+                }
+                catch (Exception e)
+                {
+                    // This is just a VISA catch to see if running in synchronous mode fixes the problem
+                    if (!MbIsVISA)
+                    {
+                        string err = string.Format("Failed getting DoOnFirstInit: {0}", e);
+                        Trace.WriteLine(err);
+                        SetErrorMessage(err);
+                    }
+                    BVisaAsyncLocalOverride = false;
+                }
+                if (!BVisaAsyncLocalOverride)
+                    VerifyIDN();
+
+                DoOnSubsequentInitInTem();
+            }
+            catch (Exception e)
+            {
+                // Handle or rethrow the exception as needed
+                string err = string.Format("Failed getting DoOnFirstInit next time: {0}", e);
+                Trace.WriteLine(err);
+                SetErrorMessage(err);
+            }
+        }
+        /// <summary>
+        /// Find the states and bild StateVector
+        /// </summary>
+        /// <returns>StateVector</returns>
+        public string GetStateVector()
+        {
+            try
+            {
+                int n = ReturnPortCount();
+                int count = 0;
+                StringBuilder stateVector = new StringBuilder();
+                for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
+                {
+                    if (count >= n)
+                        break;
+                    if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused)
+                    {
+                        stateVector.Append("*,"); // place holder for empty slot
+                        continue;
+                    }
+                    for (int x = 0; x < Modules[i].RelayCount; x++)
+                    {
+                        count++;
+                        int state = GetState(i, x);
+                        stateVector.Append(state);
+                    }
+                    stateVector.Append(",");
+                }
+                return stateVector.ToString();
+            }
+            catch (Exception ex)
+            {
+                // Handle or rethrow the exception as needed
+                string err = string.Format(ex.ToString());
+                Trace.WriteLine(err);
+                SetErrorMessage(err);
+            }
+            return string.Empty;
+        }
+        /// <summary>
+        ///  Find the module and state   
+        /// </summary>
+        /// <param name="switchNum"></param>
+        /// <returns>State</returns>
+        public int GetState(int switchNum)
+        {
+            try
+            {
+                if (switchNum >= ModuleInfoIndex.Count())
+                {
+                    string err = "Switch number is greater than configured number of switches";
+                    Trace.WriteLine(err);
+                    SetErrorMessage(err);
+                }
+
+                int moduleIndex = ModuleInfoIndex[switchNum]; // find out which module this is in
+                int switchOffset = switchNum - Modules[moduleIndex].FirstSwitchNum; // and which switch in that module
+
+                return GetState(moduleIndex, switchOffset);
+            }
+            catch (Exception ex)
+            {
+                // Handle or rethrow the exception as needed
+                string err = string.Format(ex.ToString());
+                Trace.WriteLine(err);
+                SetErrorMessage(err);
+            }
+            return -1;
+        }
+        /// <summary>
+        /// Set the states with delays
+        /// </summary>
+        /// <param name="states"></param>
+        public void SetStateVector(char[] states)
+        {
+            try
+            {
+                int x = 0;
+                int n = ReturnPortCount();
+                while (x < n)
+                {
+                    if (states[x] == '\0')
+                        break;
+                    if ((states[x] != '*') && (states[x] != ','))
+                    {
+                        SetState(x, states[x] - 0x30);
+                        x++;
+                    }
+                    x++;
+                }
+                SwitchedTime = DateTime.Now.Millisecond; // for cascaded delays
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                string err = string.Format(ex.ToString());
+                Trace.WriteLine(err);
+                SetErrorMessage(err);
+            }
+        }
+        public int CheckInterlock()
+        {
+            for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
+            {
+                if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused || Modules[i].ModuleType == TEMSModuleType.EMSType_EMControl)
+                    continue;
+                int address = Modules[i].EMCenterNum * 10 + Modules[i].EMCSlotNum;
+                string result = string.Format("{0}:INT_RELAY_A?", address);
+                if (result.Contains("ERROR_205"))
+                    return 1;
+            }
+            return 0;
+        }
+
+
+        /// <summary>
+        /// Verifies the identity of the switch plug-in in the slot with the configuration
+        /// </summary>
+        private void VerifyIDN()
+        {
+            try
+            {
+                for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
+                {
+                    if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused)
+                        continue;
+
+                    int address = Modules[i].EMCenterNum * 10 + Modules[i].EMCSlotNum;
+                    string idn = string.Format("{0}:*IDN?", address);
+
+                    bool error = false;
+                    switch (Modules[i].ModuleType)
+                    {
+                        case TEMSModuleType.EMSType_2XSP2T:
+                            if ((idn.IndexOf("EMSwitch 7001-001") < 0) && (idn.IndexOf("EMSwitch 7001-011") < 0) &&
+                                (idn.IndexOf("EMSwitch 7001-023") < 0) && (idn.IndexOf("EMSwitch 7001-026") < 0))
+                                error = true;
+                            break;
+                        case TEMSModuleType.EMSType_4XSP2T:
+                            if ((idn.IndexOf("EMSwitch 7001-002") < 0) && (idn.IndexOf("EMSwitch 7001-024") < 0) &&
+                                (idn.IndexOf("EMSwitch 7001-012") < 0) && (idn.IndexOf("EMSwitch 7001-027") < 0))
+                                error = true;
+                            break;
+                        case TEMSModuleType.EMSType_2XSP6T:
+                            if ((idn.IndexOf("EMSwitch 7001-003") < 0) && (idn.IndexOf("EMSwitch 7001-013") < 0))
+                                error = true;
+                            break;
+                        case TEMSModuleType.EMSType_EMControl:
+                            if ((idn.IndexOf("ETS-Lindgren, EMControl") < 0) && (idn.IndexOf("D.A.R.E!!, RadiControl") < 0))
+                                error = true;
+                            break;
+                        case TEMSModuleType.EMSType_1XSP6T:
+                            if ((idn.IndexOf("EMSwitch 7001-005") < 0) && (idn.IndexOf("EMSwitch 7001-025") < 0))
+                                error = true;
+                            break;
+                        case TEMSModuleType.EMSType_1XSP2T:
+                            if (idn.IndexOf("EMSwitch 7001-021") < 0)
+                                error = true;
+                            break;
+                    }
+                    if (error)
+                    {
+                        string err = @"A valid EMSwitch was not found in EMCenter: " + Modules[i].EMCenterNum +
+                                        " Slot: " + Modules[i].EMCSlotNum + ExEquipName +
+                                        "  Received \"" + idn + "\" for an ID string.";
+                        Trace.WriteLine(err);
+                        SetErrorMessage(err);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle or rethrow the exception as needed
+                string err = string.Format(ex.ToString());
+                Trace.WriteLine(err);
+                SetErrorMessage(err);
+            }
+        }
+        /// <summary>
+        /// Set ModuleTypeInfo with values
+        /// </summary>
         private void SetModuleTypeInfo()
         {
 
@@ -315,6 +621,10 @@ namespace ETS.Switch
                 new TModuleInfo { ModuleType = TEMSModuleType.EMSType_1XSP2T, RelayCount = 1, StateCount = 2, FirstState = 0, EMCSlotNum=0, EMCenterNum = 0, FirstSwitchNum=0}
             };
         }
+        /// <summary>
+        /// Assign Modules with Config values
+        /// </summary>
+        /// <returns></returns>
         private TModuleInfo[] SetModules()
         {
             // Fill 'Modules' with information about plug-ins in each slot
@@ -347,91 +657,7 @@ namespace ETS.Switch
             UseShadow = false;
             return Modules;
         }
-        public TModuleInfo[] GetModuleTypeInfo()
-        {
-            return ModuleTypeInfo;
-        }
-
-        public void DoOnFirstInit()
-        {
-            try
-            {
-                try
-                {
-                    // Verify the presence of the correct EMSwitch cards in the EMCenters, i.e., verify the configuration
-                    VerifyIDN();
-                }
-                catch (Exception e)
-                {
-                    // This is just a VISA catch to see if running in synchronous mode fixes the problem
-                    if (!MbIsVISA)
-                    {
-                        string err = string.Format("Failed getting DoOnFirstInit: {0}", e);
-                        Trace.WriteLine(err);
-                        SetErrorMessage(err);
-                    }
-                    BVisaAsyncLocalOverride = false;
-                }
-                if (!BVisaAsyncLocalOverride)
-                    VerifyIDN();
-
-                DoOnSubsequentInit();
-            }
-            catch (Exception e)
-            {
-                // Handle or rethrow the exception as needed
-                string err = string.Format("Failed getting DoOnFirstInit next time: {0}", e);
-                Trace.WriteLine(err);
-                SetErrorMessage(err);
-            }
-        }
-
-        public void DoOnSubsequentInit()
-        {
-            try
-            {
-                UseShadow = false;
-                StateShadow.Clear();
-                switchDriver.DoOnSubsequentInit();
-                if (!BblankStates)
-                    UseShadow = true;
-            }
-            catch (Exception ex)
-            {
-                // Handle or rethrow the exception as needed
-                string err = string.Format("Failed getting DoOnFirstInit next time: {0}", ex);
-                Trace.WriteLine(err);
-                SetErrorMessage(err);
-            }
-        }
-
-        public int GetState(int switchNum)
-        {
-            try
-            {
-                if (switchNum >= ModuleInfoIndex.Count())
-                {
-                    string err = "Switch number is greater than configured number of switches";
-                    Trace.WriteLine(err);
-                    SetErrorMessage(err);
-                }
-
-                int moduleIndex = ModuleInfoIndex[switchNum]; // find out which module this is in
-                int switchOffset = switchNum - Modules[moduleIndex].FirstSwitchNum; // and which switch in that module
-
-                return GetState(moduleIndex, switchOffset);
-            }
-            catch (Exception ex)
-            {
-                // Handle or rethrow the exception as needed
-                string err = string.Format(ex.ToString());
-                Trace.WriteLine(err);
-                SetErrorMessage(err);
-            }
-            return -1;
-        }
-
-        public int GetState(int moduleIndex, int switchNum)
+        private int GetState(int moduleIndex, int switchNum)
         {
             try
             {
@@ -447,7 +673,7 @@ namespace ETS.Switch
             return -1;
         }
 
-        public int GetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType)
+        private int GetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType)
         {
             try
             {
@@ -492,7 +718,7 @@ namespace ETS.Switch
             return -1;
         }
 
-        public int GetStateFromResult(string result, int switchType)
+        private int GetStateFromResult(string result, int switchType)
         {
             int res = 0;
             try
@@ -540,7 +766,7 @@ namespace ETS.Switch
             return res;
         }
 
-        public string GetStateStrFromState(int iState, int switchType)
+        private string GetStateStrFromState(int iState, int switchType)
         {
             string result = "";
             try
@@ -584,12 +810,12 @@ namespace ETS.Switch
             return result;
         }
 
-        public int ReturnPortCount()
+        private int ReturnPortCount()
         {
             return SwitchCount;
         }
 
-        public void SetState(int switchNum, int iState)
+        private void SetState(int switchNum, int iState)
         {
             try
             {
@@ -613,7 +839,7 @@ namespace ETS.Switch
             }
         }
 
-        public void SetState(int moduleIndex, int switchNum, int iState)
+        private void SetState(int moduleIndex, int switchNum, int iState)
         {
             try
             {
@@ -636,7 +862,7 @@ namespace ETS.Switch
             }
         }
 
-        public void SetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType, int state)
+        private void SetState(int emcenterNum, int emcenterSlot, int switchNum, int switchType, int state)
         {
             string result = "";
             try
@@ -722,149 +948,28 @@ namespace ETS.Switch
                 SetErrorMessage(ex.ToString());
             }
         }
-
-        public void SetStateVector(char[] states)
+       /// <summary>
+       /// Assign or clear State details
+       /// </summary>
+        private void DoOnSubsequentInitInTem()
         {
             try
             {
-                int x = 0;
-                int n = ReturnPortCount();
-                while (x < n)
-                {
-                    if (states[x] == '\0')
-                        break;
-                    if ((states[x] != '*') && (states[x] != ','))
-                    {
-                        SetState(x, states[x] - 0x30);
-                        x++;
-                    }
-                    x++;
-                }
-                SwitchedTime = DateTime.Now.Millisecond; // for cascaded delays
-            }
-            catch (Exception ex)
-            {
-                // Handle exception
-                string err = string.Format(ex.ToString());
-                Trace.WriteLine(err);
-                SetErrorMessage(err);
-            }
-        }
-
-        public string GetStateVector()
-        {
-            try
-            {
-                int n = ReturnPortCount();
-                int count = 0;
-                StringBuilder stateVector = new StringBuilder();
-                for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
-                {
-                    if (count >= n)
-                        break;
-                    if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused)
-                    {
-                        stateVector.Append("*,"); // place holder for empty slot
-                        continue;
-                    }
-                    for (int x = 0; x < Modules[i].RelayCount; x++)
-                    {
-                        count++;
-                        int state = GetState(i, x);
-                        stateVector.Append(state);
-                    }
-                    stateVector.Append(",");
-                }
-                return stateVector.ToString();
+                UseShadow = false;
+                StateShadow.Clear();
+                switchDriver.DoOnSubsequentInit();
+                if (!BblankStates)
+                    UseShadow = true;
             }
             catch (Exception ex)
             {
                 // Handle or rethrow the exception as needed
-                string err = string.Format(ex.ToString());
-                Trace.WriteLine(err);
-                SetErrorMessage(err);
-            }
-            return string.Empty;
-        }
-
-        public int CheckInterlock()
-        {
-            for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
-            {
-                if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused || Modules[i].ModuleType == TEMSModuleType.EMSType_EMControl)
-                    continue;
-                int address = Modules[i].EMCenterNum * 10 + Modules[i].EMCSlotNum;
-                string result = string.Format("{0}:INT_RELAY_A?", address);
-                if (result.Contains("ERROR_205"))
-                    return 1;
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// Verifies the identity of the switch plug-in in the slot with the configuration
-        /// </summary>
-        private void VerifyIDN()
-        {
-            try
-            {
-                for (int i = 0; i < ParametersTypeInfo.MAX_EMCENTER_SLOTS; i++)
-                {
-                    if (Modules[i].ModuleType == TEMSModuleType.EMSType_Unused)
-                        continue;
-
-                    int address = Modules[i].EMCenterNum * 10 + Modules[i].EMCSlotNum;
-                    string idn = string.Format("{0}:*IDN?", address);
-
-                    bool error = false;
-                    switch (Modules[i].ModuleType)
-                    {
-                        case TEMSModuleType.EMSType_2XSP2T:
-                            if ((idn.IndexOf("EMSwitch 7001-001") < 0) && (idn.IndexOf("EMSwitch 7001-011") < 0) &&
-                                (idn.IndexOf("EMSwitch 7001-023") < 0) && (idn.IndexOf("EMSwitch 7001-026") < 0))
-                                error = true;
-                            break;
-                        case TEMSModuleType.EMSType_4XSP2T:
-                            if ((idn.IndexOf("EMSwitch 7001-002") < 0) && (idn.IndexOf("EMSwitch 7001-024") < 0) &&
-                                (idn.IndexOf("EMSwitch 7001-012") < 0) && (idn.IndexOf("EMSwitch 7001-027") < 0))
-                                error = true;
-                            break;
-                        case TEMSModuleType.EMSType_2XSP6T:
-                            if ((idn.IndexOf("EMSwitch 7001-003") < 0) && (idn.IndexOf("EMSwitch 7001-013") < 0))
-                                error = true;
-                            break;
-                        case TEMSModuleType.EMSType_EMControl:
-                            if ((idn.IndexOf("ETS-Lindgren, EMControl") < 0) && (idn.IndexOf("D.A.R.E!!, RadiControl") < 0))
-                                error = true;
-                            break;
-                        case TEMSModuleType.EMSType_1XSP6T:
-                            if ((idn.IndexOf("EMSwitch 7001-005") < 0) && (idn.IndexOf("EMSwitch 7001-025") < 0))
-                                error = true;
-                            break;
-                        case TEMSModuleType.EMSType_1XSP2T:
-                            if (idn.IndexOf("EMSwitch 7001-021") < 0)
-                                error = true;
-                            break;
-                    }
-                    if (error)
-                    {
-                        string err = @"A valid EMSwitch was not found in EMCenter: " + Modules[i].EMCenterNum +
-                                        " Slot: " + Modules[i].EMCSlotNum + ExEquipName +
-                                        "  Received \"" + idn + "\" for an ID string.";
-                        Trace.WriteLine(err);
-                        SetErrorMessage(err);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle or rethrow the exception as needed
-                string err = string.Format(ex.ToString());
+                string err = string.Format("Failed getting DoOnFirstInit next time: {0}", ex);
                 Trace.WriteLine(err);
                 SetErrorMessage(err);
             }
         }
-
         #endregion
+
     }
 }
